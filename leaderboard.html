@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - IntelliChem Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .leaderboard-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .leaderboard-table th, .leaderboard-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .leaderboard-table th {
+            background: rgba(0, 0, 0, 0.5);
+            color: #00eaff;
+        }
+
+        .leaderboard-table tr:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .leaderboard-table td {
+            color: white;
+        }
+
+        .leaderboard-table .rank {
+            font-weight: bold;
+        }
+
+        .leaderboard-table .user {
+            color: #00eaff;
+        }
+.chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.chatbot-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.chatbot-popup {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #4F46E5; 
+    color: #FFFFFF; 
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.chatbot-header button {
+    background: none;
+    border: none;
+    color: #FFFFFF; 
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.chatbot-body {
+    padding: 1rem;
+    height: 200px;
+    overflow-y: auto;
+    background-color: #F9FAFB; 
+    color: #1F2937; 
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #E0E0E0;
+    background-color: #FFFFFF; 
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #E0E0E0; 
+    border-radius: 4px;
+    background-color: #FFFFFF; 
+    color: #1F2937; 
+}
+
+.chatbot-input button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #4F46E5; 
+    color: #FFFFFF; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🔬 IntelliChem Lab</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="periodic_table.html">Periodic Table</a></li>
+            <li><a href="experiments.html">Experiments</a></li>
+            <li><a href="quizzes.html">Quizzes</a></li>
+        </ul>
+    </nav>
+
+    <div class="leaderboard-container">
+        <h1>🏆 Leaderboard</h1>
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th>Score</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="rank">1</td>
+                    <td class="user">Sandhiya Kennedy</td>
+                    <td>950</td>
+                    <td>95%</td>
+                </tr>
+                <tr>
+                    <td class="rank">2</td>
+                    <td class="user">Meera Eugil</td>
+                    <td>920</td>
+                    <td>92%</td>
+                </tr>
+                <tr>
+                    <td class="rank">3</td>
+                    <td class="user">Keerthana</td>
+                    <td>890</td>
+                    <td>89%</td>
+                </tr>
+                <tr>
+                    <td class="rank">4</td>
+                    <td class="user">Devanandha</td>
+                    <td>870</td>
+                    <td>87%</td>
+                </tr>
+                <tr>
+                    <td class="rank">5</td>
+                    <td class="user">Pavithra</td>
+                    <td>850</td>
+                    <td>85%</td>
+                </tr>
+                <tr>
+                    <td class="rank">6</td>
+                    <td class="user">Swetha</td>
+                    <td>850</td>
+                    <td>85%</td>
+                </tr>
+                <tr>
+                    <td class="rank">7</td>
+                    <td class="user">Reshmitha</td>
+                    <td>850</td>
+                    <td>85%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<div class="chatbot-icon" id="chatbot-icon">
+    <img src="Chatbot_icon.png" alt="Chatbot">
+</div>
+
+<div class="chatbot-popup" id="chatbot-popup">
+    <div class="chatbot-header">
+        <h3>Catalyzt-ChatBot</h3>
+        <button id="close-chatbot">×</button>
+    </div>
+    <div class="chatbot-body" id="chatbot-body">
+        <div id="chatbot-messages"></div>
+    </div>
+    <div class="chatbot-input">
+        <input type="text" id="chatbot-input" placeholder="Ask me anything...">
+        <button id="send-message">Send</button>
+    </div>
+</div>
+<script>
+const chatbotIcon = document.getElementById("chatbot-icon");
+const chatbotPopup = document.getElementById("chatbot-popup");
+const closeChatbot = document.getElementById("close-chatbot");
+
+chatbotIcon.addEventListener("click", () => {
+    chatbotPopup.style.display = "block";
+});
+
+closeChatbot.addEventListener("click", () => {
+    chatbotPopup.style.display = "none";
+});
+
+const chatbotInput = document.getElementById("chatbot-input");
+const sendMessageButton = document.getElementById("send-message");
+const chatbotMessages = document.getElementById("chatbot-messages");
+
+sendMessageButton.addEventListener("click", () => {
+    const message = chatbotInput.value.trim();
+    if (message) {
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        chatbotMessages.appendChild(messageElement);
+        chatbotInput.value = ""; 
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; 
+    }
+});
+
+chatbotInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        sendMessageButton.click();
+    }
+});
+</script>
+    <footer>
+        <p>&copy; 2025 IntelliChem Lab | Designed for OLabs Accessibility</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - IntelliChem Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background: linear-gradient(135deg, #0a192f, #1c2b4a);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .dashboard-section h2 {
+            color: #00eaff;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            height: 20px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background: #00eaff;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .experiment-log, .quiz-scores, .badges-list, .student-details {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experiment-log li, .quiz-scores li, .badges-list li, .student-details li {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .student-details {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+        }
+
+        .student-details td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .student-details td:first-child {
+            font-weight: bold;
+            color: #00eaff;
+            width: 40%; 
+        }
+
+        .student-details td:last-child {
+            width: 60%; 
+        }
+
+        .student-details tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badges-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badges-list li {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badges-list img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .student-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .student-info-grid .info-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .student-info-grid .info-item span {
+            font-weight: bold;
+            color: #00eaff;
+        }
+       
+.chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.chatbot-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.chatbot-popup {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background-color: #FFFFFF; 
+    border: 1px solid #E0E0E0; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #4F46E5;
+    color: #FFFFFF; 
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.chatbot-header button {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.chatbot-body {
+    padding: 1rem;
+    height: 200px;
+    overflow-y: auto;
+    background-color: #F9FAFB; 
+    color: #1F2937; 
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #E0E0E0; 
+    background-color: #FFFFFF;
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #E0E0E0; 
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    color: #1F2937;
+}
+
+.chatbot-input button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #4F46E5; 
+    color: #FFFFFF; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🔬 IntelliChem Lab</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="periodic_table.html">Periodic Table</a></li>
+            <li><a href="experiments.html">Experiments</a></li>
+            <li><a href="quizzes.html">Quizzes</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-container">
+        <h1>DASHBOARD</h1>
+        <div class="dashboard-section">
+            <h2>Student Information</h2>
+            <div class="student-info-grid">
+                <div class="info-item">
+                    <span>Name:</span> Sandhiya Kennedy
+                </div>
+                <div class="info-item">
+                    <span>Grade:</span> 10th
+                </div>
+                <div class="info-item">
+                    <span>School:</span> IntelliChem High School
+                </div>
+                <div class="info-item">
+                    <span>Email:</span> sandhiyakennedy@intellichem.com
+                </div>
+                <div class="info-item">
+                    <span>Joined:</span> January 2025
+                </div>
+                <div class="info-item">
+                    <span>Total Experiments Completed:</span> 3
+                </div>
+                <div class="info-item">
+                    <span>Total Quizzes Taken:</span> 4
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <div class="dashboard-section">
+                <h2>Learning Progress</h2>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 75%;"></div>
+                </div>
+                <p>75% completed</p>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Experiment Logs</h2>
+                <ul class="experiment-log">
+                    <li>Experiment 1: Acid-Base Titration (Completed)</li>
+                    <li>Experiment 2: Electrolysis (In Progress)</li>
+                    <li>Experiment 3: Redox Reactions (Not Started)</li>
+                    <li>Experiment 4: Rusting of Iron (Completed)</li>
+                    <li>Experiment 5: Separation of Mixtures (In Progress)</li>
+                </ul>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Quiz Scores</h2>
+                <ul class="quiz-scores">
+                    <li>Quiz 1: 85%</li>
+                    <li>Quiz 2: 92%</li>
+                    <li>Quiz 3: 78%</li>
+                    <li>Quiz 4: 88%</li>
+                    <li>Quiz 5: 95%</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Badges</h2>
+            <ul class="badges-list">
+                <li>
+                    <img src="Chemistry_master.png" alt="Badge 1">
+                    <span>Chemistry Master</span>
+                </li>
+                <li>
+                    <img src="Lab_expert.png" alt="Badge 2">
+                    <span>Lab Expert</span>
+                </li>
+                <li>
+                    <img src="Quiz_champion.png" alt="Badge 3">
+                    <span>Quiz Champion</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+<div class="chatbot-icon" id="chatbot-icon">
+    <img src="Chatbot_icon.png" alt="Chatbot">
+</div>
+
+<div class="chatbot-popup" id="chatbot-popup">
+    <div class="chatbot-header">
+        <h3>Catalyzt-ChatBot</h3>
+        <button id="close-chatbot">×</button>
+    </div>
+    <div class="chatbot-body" id="chatbot-body">
+        <div id="chatbot-messages"></div>
+    </div>
+    <div class="chatbot-input">
+        <input type="text" id="chatbot-input" placeholder="Ask me anything...">
+        <button id="send-message">Send</button>
+    </div>
+</div>
+<script>
+const chatbotIcon = document.getElementById("chatbot-icon");
+const chatbotPopup = document.getElementById("chatbot-popup");
+const closeChatbot = document.getElementById("close-chatbot");
+
+chatbotIcon.addEventListener("click", () => {
+    chatbotPopup.style.display = "block";
+});
+
+closeChatbot.addEventListener("click", () => {
+    chatbotPopup.style.display = "none";
+});
+
+const chatbotInput = document.getElementById("chatbot-input");
+const sendMessageButton = document.getElementById("send-message");
+const chatbotMessages = document.getElementById("chatbot-messages");
+
+sendMessageButton.addEventListener("click", () => {
+    const message = chatbotInput.value.trim();
+    if (message) {
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        chatbotMessages.appendChild(messageElement);
+        chatbotInput.value = ""; // Clear input
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto-scroll
+    }
+});
+
+chatbotInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        sendMessageButton.click();
+    }
+});
+</script>
+    <footer>
+        <p>&copy; 2025 IntelliChem Lab | Designed for OLabs Accessibility</p>
+    </footer>
+</body>
+</html>

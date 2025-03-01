@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliChem Lab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger-menu">
+            <img src="Hamburger_icon.png" alt="Menu" id="menu-icon">
+            <ul class="dropdown-menu" id="dropdown-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="guidelines.html">Guidelines</a></li>
+            </ul>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="periodic_table.html">Periodic Table</a></li>
+            <li><a href="experiments.html">Experiments</a></li>
+            <li><a href="quizzes.html">Quizzes</a></li>
+        </ul>
+    </nav>
+
+    <div class="homepage-container">
+        <header class="hero-section">
+            <h1>🔬 Welcome to IntelliChem Lab</h1>
+            <p>Revolutionizing Virtual Chemistry with AI Smart Assisant & IOT!</p>
+        </header>
+       
+       <section class="features" id="features">
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>🤖 AI-Powered Chatbot</h3>
+                <p>Get instant troubleshooting & personalized assistance via AI.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📊 Live Data Analytics</h3>
+                <p>Track experiment progress with interactive visualizations.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📡 IoT Sensor Tracking</h3>
+                <p>Monitor experiments with real-time pH, temperature, and gas sensors.</p>
+            </div>
+        </div>
+    </section>
+    
+        <footer class="footer">
+            <p>🌟 Empowering students with immersive, AI-driven science education. 🌟</p>
+        </footer>
+    </div>
+    
+    </div>
+
+    <div class="chatbot-icon" id="chatbot-icon">
+        <img src="Chatbot_icon.png" alt="Chatbot">
+    </div>
+
+    <div class="chatbot-popup" id="chatbot-popup">
+        <div class="chatbot-header">
+            <h3>Catalyzt-ChatBot</h3>
+            <button id="close-chatbot">×</button>
+        </div>
+        <div class="chatbot-body" id="chatbot-body">
+            <div id="chatbot-messages"></div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Ask me anything...">
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 IntelliChem Lab | Designed for OLabs Accessibility</p>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById("menu-icon").addEventListener("click", function() {
+    var menu = document.getElementById("dropdown-menu");
+    menu.classList.toggle("show-menu");
+});
+    </script>
+</body>
+</html>

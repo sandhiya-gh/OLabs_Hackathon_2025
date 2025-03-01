@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic Table - IntelliChem Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .table {
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+
+        .element {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .element:hover {
+            background-color: #ddd;
+        }
+        .alkali { background-color: #ffcccb; }
+        .alkaline { background-color: #ffebcd; }
+        .transition { background-color: #add8e6; }
+        .other { background-color: #f0e68c; }
+        .halogen { background-color: #90ee90; }
+        .noble { background-color: #dda0dd; }
+        .lanthanide { background-color: #ffb6c1; }
+        .actinide { background-color: #ffa07a; }
+
+.chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.chatbot-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.chatbot-popup {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background-color: #FFFFFF; 
+    border: 1px solid #E0E0E0; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #4F46E5; 
+    color: #FFFFFF; 
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.chatbot-header button {
+    background: none;
+    border: none;
+    color: #FFFFFF; 
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.chatbot-body {
+    padding: 1rem;
+    height: 200px;
+    overflow-y: auto;
+    background-color: #F9FAFB;
+    color: #1F2937;
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #E0E0E0; 
+    background-color: #FFFFFF;
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #FFFFFF; 
+    color: #1F2937;
+}
+
+.chatbot-input button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #4F46E5; 
+    color: #FFFFFF; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🔬 IntelliChem Lab</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="periodic_table.html">Periodic Table</a></li>
+            <li><a href="experiments.html">Experiments</a></li>
+            <li><a href="quizzes.html">Quizzes</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h3 style="text-align: center;">Interactive Periodic Table</h3>
+        <div class="table">
+            <div class="element other" onclick="showElement('H')">H</div>
+            <div style="grid-column: 18" class="element noble" onclick="showElement('He')">He</div>
+            <div class="element alkali" onclick="showElement('Li')">Li</div>
+            <div class="element alkaline" onclick="showElement('Be')">Be</div>
+            <div style="grid-column: 13" class="element transition" onclick="showElement('B')">B</div>
+            <div class="element other" onclick="showElement('C')">C</div>
+            <div class="element other" onclick="showElement('N')">N</div>
+            <div class="element other" onclick="showElement('O')">O</div>
+            <div class="element halogen" onclick="showElement('F')">F</div>
+            <div class="element noble" onclick="showElement('Ne')">Ne</div>
+            <div class="element alkali" onclick="showElement('Na')">Na</div>
+            <div class="element alkaline" onclick="showElement('Mg')">Mg</div>
+            <div style="grid-column: 13" class="element transition" onclick="showElement('Al')">Al</div>
+            <div class="element transition" onclick="showElement('Si')">Si</div>
+            <div class="element other" onclick="showElement('P')">P</div>
+            <div class="element other" onclick="showElement('S')">S</div>
+            <div class="element halogen" onclick="showElement('Cl')">Cl</div>
+            <div class="element noble" onclick="showElement('Ar')">Ar</div>
+            <div class="element alkali" onclick="showElement('K')">K</div>
+            <div class="element alkaline" onclick="showElement('Ca')">Ca</div>
+            <div class="element transition" onclick="showElement('Sc')">Sc</div>
+            <div class="element transition" onclick="showElement('Ti')">Ti</div>
+            <div class="element transition" onclick="showElement('V')">V</div>
+            <div class="element transition" onclick="showElement('Cr')">Cr</div>
+            <div class="element transition" onclick="showElement('Mn')">Mn</div>
+            <div class="element transition" onclick="showElement('Fe')">Fe</div>
+            <div class="element transition" onclick="showElement('Co')">Co</div>
+            <div class="element transition" onclick="showElement('Ni')">Ni</div>
+            <div class="element transition" onclick="showElement('Cu')">Cu</div>
+            <div class="element transition" onclick="showElement('Zn')">Zn</div>
+            <div class="element transition" onclick="showElement('Ga')">Ga</div>
+            <div class="element transition" onclick="showElement('Ge')">Ge</div>
+            <div class="element transition" onclick="showElement('As')">As</div>
+            <div class="element transition" onclick="showElement('Se')">Se</div>
+            <div class="element halogen" onclick="showElement('Br')">Br</div>
+            <div class="element noble" onclick="showElement('Kr')">Kr</div>
+            <div class="element alkali" onclick="showElement('Rb')">Rb</div>
+            <div class="element alkaline" onclick="showElement('Sr')">Sr</div>
+            <div class="element transition" onclick="showElement('Y')">Y</div>
+            <div class="element transition" onclick="showElement('Zr')">Zr</div>
+            <div class="element transition" onclick="showElement('Nb')">Nb</div>
+            <div class="element transition" onclick="showElement('Mo')">Mo</div>
+            <div class="element transition" onclick="showElement('Tc')">Tc</div>
+            <div class="element transition" onclick="showElement('Ru')">Ru</div>
+            <div class="element transition" onclick="showElement('Rh')">Rh</div>
+            <div class="element transition" onclick="showElement('Pd')">Pd</div>
+            <div class="element transition" onclick="showElement('Ag')">Ag</div>
+            <div class="element transition" onclick="showElement('Cd')">Cd</div>
+            <div class="element transition" onclick="showElement('In')">In</div>
+            <div class="element transition" onclick="showElement('Sn')">Sn</div>
+            <div class="element transition" onclick="showElement('Sb')">Sb</div>
+            <div class="element transition" onclick="showElement('Te')">Te</div>
+            <div class="element halogen" onclick="showElement('I')">I</div>
+            <div class="element noble" onclick="showElement('Xe')">Xe</div>
+            <div class="element alkali" onclick="showElement('Cs')">Cs</div>
+            <div class="element alkaline" onclick="showElement('Ba')">Ba</div>
+            <div class="element transition" onclick="showElement('La')">La</div>
+            <div class="element transition" onclick="showElement('Hf')">Hf</div>
+            <div class="element transition" onclick="showElement('Ta')">Ta</div>
+            <div class="element transition" onclick="showElement('W')">W</div>
+            <div class="element transition" onclick="showElement('Re')">Re</div>
+            <div class="element transition" onclick="showElement('Os')">Os</div>
+            <div class="element transition" onclick="showElement('Ir')">Ir</div>
+            <div class="element transition" onclick="showElement('Pt')">Pt</div>
+            <div class="element transition" onclick="showElement('Au')">Au</div>
+            <div class="element transition" onclick="showElement('Hg')">Hg</div>
+            <div class="element transition" onclick="showElement('Tl')">Tl</div>
+            <div class="element transition" onclick="showElement('Pb')">Pb</div>
+            <div class="element transition" onclick="showElement('Bi')">Bi</div>
+            <div class="element transition" onclick="showElement('Po')">Po</div>
+            <div class="element halogen" onclick="showElement('At')">At</div>
+            <div class="element noble" onclick="showElement('Rn')">Rn</div>
+            <div class="element alkali" onclick="showElement('Fr')">Fr</div>
+            <div class="element alkaline" onclick="showElement('Ra')">Ra</div>
+            <div class="element transition" onclick="showElement('Ac')">Ac</div>
+            <div class="element transition" onclick="showElement('Rf')">Rf</div>
+            <div class="element transition" onclick="showElement('Db')">Db</div>
+            <div class="element transition" onclick="showElement('Sg')">Sg</div>
+            <div class="element transition" onclick="showElement('Bh')">Bh</div>
+            <div class="element transition" onclick="showElement('Hs')">Hs</div>
+            <div class="element transition" onclick="showElement('Mt')">Mt</div>
+            <div class="element transition" onclick="showElement('Ds')">Ds</div>
+            <div class="element transition" onclick="showElement('Rg')">Rg</div>
+            <div class="element transition" onclick="showElement('Cn')">Cn</div>
+            <div class="element transition" onclick="showElement('Nh')">Nh</div>
+            <div class="element transition" onclick="showElement('Fl')">Fl</div>
+            <div class="element transition" onclick="showElement('Mc')">Mc</div>
+            <div class="element transition" onclick="showElement('Lv')">Lv</div>
+            <div class="element halogen" onclick="showElement('Ts')">Ts</div>
+            <div class="element noble" onclick="showElement('Og')">Og</div>
+            <div style="grid-column:4 " class="element lanthanide" onclick="showElement('Ce')">Ce</div>
+            <div class="element lanthanide" onclick="showElement('Pr')">Pr</div>
+            <div class="element lanthanide" onclick="showElement('Nd')">Nd</div>
+            <div class="element lanthanide" onclick="showElement('Pm')">Pm</div>
+            <div class="element lanthanide" onclick="showElement('Sm')">Sm</div>
+            <div class="element lanthanide" onclick="showElement('Eu')">Eu</div>
+            <div class="element lanthanide" onclick="showElement('Gd')">Gd</div>
+            <div class="element lanthanide" onclick="showElement('Tb')">Tb</div>
+            <div class="element lanthanide" onclick="showElement('Dy')">Dy</div>
+            <div class="element lanthanide" onclick="showElement('Ho')">Ho</div>
+            <div class="element lanthanide" onclick="showElement('Er')">Er</div>
+            <div class="element lanthanide" onclick="showElement('Tm')">Tm</div>
+            <div class="element lanthanide" onclick="showElement('Yb')">Yb</div>
+            <div class="element lanthanide" onclick="showElement('Lu')">Lu</div>
+            <div style="grid-column:4 " class="element actinide" onclick="showElement('Th')">Th</div>
+            <div class="element actinide" onclick="showElement('Pa')">Pa</div>
+            <div class="element actinide" onclick="showElement('U')">U</div>
+            <div class="element actinide" onclick="showElement('Np')">Np</div>
+            <div class="element actinide" onclick="showElement('Pu')">Pu</div>
+            <div class="element actinide" onclick="showElement('Am')">Am</div>
+            <div class="element actinide" onclick="showElement('Cm')">Cm</div>
+            <div class="element actinide" onclick="showElement('Bk')">Bk</div>
+            <div class="element actinide" onclick="showElement('Cf')">Cf</div>
+            <div class="element actinide" onclick="showElement('Es')">Es</div>
+            <div class="element actinide" onclick="showElement('Fm')">Fm</div>
+            <div class="element actinide" onclick="showElement('Md')">Md</div>
+            <div class="element actinide" onclick="showElement('No')">No</div>
+            <div class="element actinide" onclick="showElement('Lr')">Lr</div>
+        </div>
+    </div>
+    
+    <div class="element-popup" id="element-popup">
+        <div class="popup-content">
+            <h2 id="element-name"></h2>
+            <p><strong>Atomic Number:</strong> <span id="element-number"></span></p>
+            <p><strong>Symbol:</strong> <span id="element-symbol"></span></p>
+            <p><strong>Atomic Mass:</strong> <span id="element-mass"></span></p>
+            <p><strong>Category:</strong> <span id="element-category"></span></p>
+            <p><strong>Electron Configuration:</strong> <span id="element-config"></span></p>
+            <p><strong>Oxidation States:</strong> <span id="element-oxidation"></span></p>
+            <p><strong>Electronegativity:</strong> <span id="element-electronegativity"></span></p>
+            <p><strong>Melting Point:</strong> <span id="element-melting"></span></p>
+            <p><strong>Boiling Point:</strong> <span id="element-boiling"></span></p>
+            <p><strong>Year Discovered:</strong> <span id="element-year"></span></p>
+            <button id="close-popup">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function showElement(symbol) {
+            const elementPopup = document.getElementById('element-popup');
+            const element = elements.find(el => el.symbol === symbol);
+            if (element) {
+                document.getElementById('element-name').textContent = element.name;
+                document.getElementById('element-number').textContent = element.number;
+                document.getElementById('element-symbol').textContent = element.symbol;
+                document.getElementById('element-mass').textContent = element.mass;
+                document.getElementById('element-category').textContent = element.category;
+                document.getElementById('element-config').textContent = element.config;
+                document.getElementById('element-oxidation').textContent = element.oxidation;
+                document.getElementById('element-electronegativity').textContent = element.electronegativity;
+                document.getElementById('element-melting').textContent = element.melting;
+                document.getElementById('element-boiling').textContent = element.boiling;
+                document.getElementById('element-year').textContent = element.year;
+                elementPopup.style.display = 'block';
+            }
+        }
+
+        document.getElementById('close-popup').addEventListener('click', () => {
+            document.getElementById('element-popup').style.display = 'none';
+        });
+
+        const elements = [
+            { number: 1, symbol: "H", name: "Hydrogen", mass: "1.008", category: "Nonmetal", config: "1s¹", oxidation: "+1, -1", electronegativity: "2.20", melting: "13.99 K", boiling: "20.271 K", year: "1766" },
+            { number: 2, symbol: "He", name: "Helium", mass: "4.0026", category: "Noble Gas", config: "1s²", oxidation: "0", electronegativity: "N/A", melting: "0.95 K", boiling: "4.222 K", year: "1868" },
+            { number: 3, symbol: "Li", name: "Lithium", mass: "6.94", category: "Alkali Metal", config: "[He] 2s¹", oxidation: "+1", electronegativity: "0.98", melting: "453.65 K", boiling: "1603 K", year: "1817" },
+            { number: 4, symbol: "Be", name: "Beryllium", mass: "9.0122", category: "Alkaline Earth Metal", config: "[He] 2s²", oxidation: "+2", electronegativity: "1.57", melting: "1560 K", boiling: "2742 K", year: "1798" },
+            { number: 5, symbol: "B", name: "Boron", mass: "10.81", category: "Metalloid", config: "[He] 2s² 2p¹", oxidation: "+3", electronegativity: "2.04", melting: "2349 K", boiling: "4200 K", year: "1808" },
+            { number: 6, symbol: "C", name: "Carbon", mass: "12.011", category: "Nonmetal", config: "[He] 2s² 2p²", oxidation: "+4, +2, -4", electronegativity: "2.55", melting: "3800 K", boiling: "4300 K", year: "Ancient" },
+            { number: 7, symbol: "N", name: "Nitrogen", mass: "14.007", category: "Nonmetal", config: "[He] 2s² 2p³", oxidation: "+5, +4, +3, +2, +1, -1, -2, -3", electronegativity: "3.04", melting: "63.15 K", boiling: "77.36 K", year: "1772" },
+            { number: 8, symbol: "O", name: "Oxygen", mass: "15.999", category: "Nonmetal", config: "[He] 2s² 2p⁴", oxidation: "-2, -1", electronegativity: "3.44", melting: "54.36 K", boiling: "90.20 K", year: "1774" },
+            { number: 9, symbol: "F", name: "Fluorine", mass: "18.998", category: "Halogen", config: "[He] 2s² 2p⁵", oxidation: "-1", electronegativity: "3.98", melting: "53.53 K", boiling: "85.03 K", year: "1886" },
+            { number: 10, symbol: "Ne", name: "Neon", mass: "20.180", category: "Noble Gas", config: "[He] 2s² 2p⁶", oxidation: "0", electronegativity: "N/A", melting: "24.56 K", boiling: "27.07 K", year: "1898" },
+            { number: 11, symbol: "Na", name: "Sodium", mass: "22.990", category: "Alkali Metal", config: "[Ne] 3s¹", oxidation: "+1", electronegativity: "0.93", melting: "370.87 K", boiling: "1156 K", year: "1807" },
+            { number: 12, symbol: "Mg", name: "Magnesium", mass: "24.305", category: "Alkaline Earth Metal", config: "[Ne] 3s²", oxidation: "+2", electronegativity: "1.31", melting: "923 K", boiling: "1363 K", year: "1755" },
+            { number: 13, symbol: "Al", name: "Aluminum", mass: "26.982", category: "Post-Transition Metal", config: "[Ne] 3s² 3p¹", oxidation: "+3", electronegativity: "1.61", melting: "933.47 K", boiling: "2792 K", year: "1825" },
+            { number: 14, symbol: "Si", name: "Silicon", mass: "28.085", category: "Metalloid", config: "[Ne] 3s² 3p²", oxidation: "+4, +2, -4", electronegativity: "1.90", melting: "1687 K", boiling: "3538 K", year: "1824" },
+            { number: 15, symbol: "P", name: "Phosphorus", mass: "30.974", category: "Nonmetal", config: "[Ne] 3s² 3p³", oxidation: "+5, +3, -3", electronegativity: "2.19", melting: "317.30 K", boiling: "553.65 K", year: "1669" },
+            { number: 16, symbol: "S", name: "Sulfur", mass: "32.06", category: "Nonmetal", config: "[Ne] 3s² 3p⁴", oxidation: "+6, +4, +2, -2", electronegativity: "2.58", melting: "388.36 K", boiling: "717.87 K", year: "Ancient" },
+            { number: 17, symbol: "Cl", name: "Chlorine", mass: "35.45", category: "Halogen", config: "[Ne] 3s² 3p⁵", oxidation: "+7, +5, +3, +1, -1", electronegativity: "3.16", melting: "171.65 K", boiling: "239.11 K", year: "1774" },
+            { number: 18, symbol: "Ar", name: "Argon", mass: "39.948", category: "Noble Gas", config: "[Ne] 3s² 3p⁶", oxidation: "0", electronegativity: "N/A", melting: "83.81 K", boiling: "87.30 K", year: "1894" },
+            { number: 19, symbol: "K", name: "Potassium", mass: "39.098", category: "Alkali Metal", config: "[Ar] 4s¹", oxidation: "+1", electronegativity: "0.82", melting: "336.53 K", boiling: "1032 K", year: "1807" },
+            { number: 20, symbol: "Ca", name: "Calcium", mass: "40.078", category: "Alkaline Earth Metal", config: "[Ar] 4s²", oxidation: "+2", electronegativity: "1.00", melting: "1115 K", boiling: "1757 K", year: "1808" },
+            { number: 21, symbol: "Sc", name: "Scandium", mass: "44.956", category: "Transition Metal", config: "[Ar] 3d¹ 4s²", oxidation: "+3", electronegativity: "1.36", melting: "1814 K", boiling: "3109 K", year: "1879" },
+            { number: 22, symbol: "Ti", name: "Titanium", mass: "47.867", category: "Transition Metal", config: "[Ar] 3d² 4s²", oxidation: "+4, +3, +2", electronegativity: "1.54", melting: "1941 K", boiling: "3560 K", year: "1791" },
+            { number: 23, symbol: "V", name: "Vanadium", mass: "50.942", category: "Transition Metal", config: "[Ar] 3d³ 4s²", oxidation: "+5, +4, +3, +2", electronegativity: "1.63", melting: "2183 K", boiling: "3680 K", year: "1801" },
+            { number: 24, symbol: "Cr", name: "Chromium", mass: "51.996", category: "Transition Metal", config: "[Ar] 3d⁵ 4s¹", oxidation: "+6, +3, +2", electronegativity: "1.66", melting: "2180 K", boiling: "2944 K", year: "1797" },
+            { number: 25, symbol: "Mn", name: "Manganese", mass: "54.938", category: "Transition Metal", config: "[Ar] 3d⁵ 4s²", oxidation: "+7, +4, +3, +2", electronegativity: "1.55", melting: "1519 K", boiling: "2334 K", year: "1774" },
+            { number: 26, symbol: "Fe", name: "Iron", mass: "55.845", category: "Transition Metal", config: "[Ar] 3d⁶ 4s²", oxidation: "+3, +2", electronegativity: "1.83", melting: "1811 K", boiling: "3134 K", year: "Ancient" },
+            { number: 27, symbol: "Co", name: "Cobalt", mass: "58.933", category: "Transition Metal", config: "[Ar] 3d⁷ 4s²", oxidation: "+3, +2", electronegativity: "1.88", melting: "1768 K", boiling: "3200 K", year: "1735" },
+            { number: 28, symbol: "Ni", name: "Nickel", mass: "58.693", category: "Transition Metal", config: "[Ar] 3d⁸ 4s²", oxidation: "+2", electronegativity: "1.91", melting: "1728 K", boiling: "3186 K", year: "1751" },
+            { number: 29, symbol: "Cu", name: "Copper", mass: "63.546", category: "Transition Metal", config: "[Ar] 3d¹⁰ 4s¹", oxidation: "+2, +1", electronegativity: "1.90", melting: "1357.77 K", boiling: "2835 K", year: "Ancient" },
+            { number: 30, symbol: "Zn", name: "Zinc", mass: "65.38", category: "Transition Metal", config: "[Ar] 3d¹⁰ 4s²", oxidation: "+2", electronegativity: "1.65", melting: "692.68 K", boiling: "1180 K", year: "1746" },
+            { number: 31, symbol: "Ga", name: "Gallium", mass: "69.723", category: "Post-Transition Metal", config: "[Ar] 3d¹⁰ 4s² 4p¹", oxidation: "+3", electronegativity: "1.81", melting: "302.91 K", boiling: "2477 K", year: "1875" },
+            { number: 32, symbol: "Ge", name: "Germanium", mass: "72.630", category: "Metalloid", config: "[Ar] 3d¹⁰ 4s² 4p²", oxidation: "+4, +2", electronegativity: "2.01", melting: "1211.40 K", boiling: "3106 K", year: "1886" },
+            { number: 33, symbol: "As", name: "Arsenic", mass: "74.922", category: "Metalloid", config: "[Ar] 3d¹⁰ 4s² 4p³", oxidation: "+5, +3, -3", electronegativity: "2.18", melting: "1090 K", boiling: "887 K", year: "1250" },
+            { number: 34, symbol: "Se", name: "Selenium", mass: "78.971", category: "Nonmetal", config: "[Ar] 3d¹⁰ 4s² 4p⁴", oxidation: "+6, +4, -2", electronegativity: "2.55", melting: "494 K", boiling: "958 K", year: "1817" },
+            { number: 35, symbol: "Br", name: "Bromine", mass: "79.904", category: "Halogen", config: "[Ar] 3d¹⁰ 4s² 4p⁵", oxidation: "+7, +5, +3, +1, -1", electronegativity: "2.96", melting: "265.8 K", boiling: "332.0 K", year: "1826" },
+            { number: 36, symbol: "Kr", name: "Krypton", mass: "83.798", category: "Noble Gas", config: "[Ar] 3d¹⁰ 4s² 4p⁶", oxidation: "0", electronegativity: "3.00", melting: "115.79 K", boiling: "119.93 K", year: "1898" },
+            { number: 37, symbol: "Rb", name: "Rubidium", mass: "85.468", category: "Alkali Metal", config: "[Kr] 5s¹", oxidation: "+1", electronegativity: "0.82", melting: "312.46 K", boiling: "961 K", year: "1861" },
+            { number: 38, symbol: "Sr", name: "Strontium", mass: "87.62", category: "Alkaline Earth Metal", config: "[Kr] 5s²", oxidation: "+2", electronegativity: "0.95", melting: "1050 K", boiling: "1655 K", year: "1790" },
+            { number: 39, symbol: "Y", name: "Yttrium", mass: "88.906", category: "Transition Metal", config: "[Kr] 4d¹ 5s²", oxidation: "+3", electronegativity: "1.22", melting: "1799 K", boiling: "3609 K", year: "1794" },
+            { number: 40, symbol: "Zr", name: "Zirconium", mass: "91.224", category: "Transition Metal", config: "[Kr] 4d² 5s²", oxidation: "+4", electronegativity: "1.33", melting: "2128 K", boiling: "4682 K", year: "1789" },
+            { number: 41, symbol: "Nb", name: "Niobium", mass: "92.906", category: "Transition Metal", config: "[Kr] 4d⁴ 5s¹", oxidation: "+5, +3", electronegativity: "1.6", melting: "2750 K", boiling: "5017 K", year: "1801" },
+            { number: 42, symbol: "Mo", name: "Molybdenum", mass: "95.95", category: "Transition Metal", config: "[Kr] 4d⁵ 5s¹", oxidation: "+6, +5, +4, +3, +2", electronegativity: "2.16", melting: "2896 K", boiling: "4912 K", year: "1781" },
+            { number: 43, symbol: "Tc", name: "Technetium", mass: "98", category: "Transition Metal", config: "[Kr] 4d⁵ 5s²", oxidation: "+7, +6, +4", electronegativity: "1.9", melting: "2430 K", boiling: "4538 K", year: "1937" },
+            { number: 44, symbol: "Ru", name: "Ruthenium", mass: "101.07", category: "Transition Metal", config: "[Kr] 4d⁷ 5s¹", oxidation: "+8, +6, +4, +3, +2", electronegativity: "2.2", melting: "2607 K", boiling: "4423 K", year: "1844" },
+            { number: 45, symbol: "Rh", name: "Rhodium", mass: "102.91", category: "Transition Metal", config: "[Kr] 4d⁸ 5s¹", oxidation: "+6, +4, +3, +2, +1", electronegativity: "2.28", melting: "2237 K", boiling: "3968 K", year: "1803" },
+            { number: 46, symbol: "Pd", name: "Palladium", mass: "106.42", category: "Transition Metal", config: "[Kr] 4d¹⁰", oxidation: "+4, +2", electronegativity: "2.20", melting: "1828.05 K", boiling: "3236 K", year: "1803" },
+            { number: 47, symbol: "Ag", name: "Silver", mass: "107.87", category: "Transition Metal", config: "[Kr] 4d¹⁰ 5s¹", oxidation: "+2, +1", electronegativity: "1.93", melting: "1234.93 K", boiling: "2435 K", year: "Ancient" },
+            { number: 48, symbol: "Cd", name: "Cadmium", mass: "112.41", category: "Transition Metal", config: "[Kr] 4d¹⁰ 5s²", oxidation: "+2", electronegativity: "1.69", melting: "594.22 K", boiling: "1040 K", year: "1817" },
+            { number: 49, symbol: "In", name: "Indium", mass: "114.82", category: "Post-Transition Metal", config: "[Kr] 4d¹⁰ 5s² 5p¹", oxidation: "+3", electronegativity: "1.78", melting: "429.75 K", boiling: "2345 K", year: "1863" },
+            { number: 50, symbol: "Sn", name: "Tin", mass: "118.71", category: "Post-Transition Metal", config: "[Kr] 4d¹⁰ 5s² 5p²", oxidation: "+4, +2", electronegativity: "1.96", melting: "505.08 K", boiling: "2875 K", year: "Ancient" },
+            { number: 51, symbol: "Sb", name: "Antimony", mass: "121.76", category: "Metalloid", config: "[Kr] 4d¹⁰ 5s² 5p³", oxidation: "+5, +3, -3", electronegativity: "2.05", melting: "903.78 K", boiling: "1860 K", year: "Ancient" },
+            { number: 52, symbol: "Te", name: "Tellurium", mass: "127.60", category: "Metalloid", config: "[Kr] 4d¹⁰ 5s² 5p⁴", oxidation: "+6, +4, -2", electronegativity: "2.1", melting: "722.66 K", boiling: "1261 K", year: "1782" },
+            { number: 53, symbol: "I", name: "Iodine", mass: "126.90", category: "Halogen", config: "[Kr] 4d¹⁰ 5s² 5p⁵", oxidation: "+7, +5, +1, -1", electronegativity: "2.66", melting: "386.85 K", boiling: "457.4 K", year: "1811" },
+            { number: 54, symbol: "Xe", name: "Xenon", mass: "131.29", category: "Noble Gas", config: "[Kr] 4d¹⁰ 5s² 5p⁶", oxidation: "0", electronegativity: "2.6", melting: "161.4 K", boiling: "165.03 K", year: "1898" },
+            { number: 55, symbol: "Cs", name: "Cesium", mass: "132.91", category: "Alkali Metal", config: "[Xe] 6s¹", oxidation: "+1", electronegativity: "0.79", melting: "301.59 K", boiling: "944 K", year: "1860" },
+            { number: 56, symbol: "Ba", name: "Barium", mass: "137.33", category: "Alkaline Earth Metal", config: "[Xe] 6s²", oxidation: "+2", electronegativity: "0.89", melting: "1000 K", boiling: "2170 K", year: "1808" },
+            { number: 57, symbol: "La", name: "Lanthanum", mass: "138.91", category: "Lanthanide", config: "[Xe] 5d¹ 6s²", oxidation: "+3", electronegativity: "1.10", melting: "1193 K", boiling: "3737 K", year: "1839" },
+            { number: 58, symbol: "Ce", name: "Cerium", mass: "140.12", category: "Lanthanide", config: "[Xe] 4f¹ 5d¹ 6s²", oxidation: "+4, +3", electronegativity: "1.12", melting: "1068 K", boiling: "3716 K", year: "1803" },
+            { number: 59, symbol: "Pr", name: "Praseodymium", mass: "140.91", category: "Lanthanide", config: "[Xe] 4f³ 6s²", oxidation: "+4, +3", electronegativity: "1.13", melting: "1208 K", boiling: "3793 K", year: "1885" },
+            { number: 60, symbol: "Nd", name: "Neodymium", mass: "144.24", category: "Lanthanide", config: "[Xe] 4f⁴ 6s²", oxidation: "+3", electronegativity: "1.14", melting: "1297 K", boiling: "3347 K", year: "1885" },
+            { number: 61, symbol: "Pm", name: "Promethium", mass: "145", category: "Lanthanide", config: "[Xe] 4f⁵ 6s²", oxidation: "+3", electronegativity: "1.13", melting: "1315 K", boiling: "3273 K", year: "1945" },
+            { number: 62, symbol: "Sm", name: "Samarium", mass: "150.36", category: "Lanthanide", config: "[Xe] 4f⁶ 6s²", oxidation: "+3, +2", electronegativity: "1.17", melting: "1345 K", boiling: "2067 K", year: "1879" },
+            { number: 63, symbol: "Eu", name: "Europium", mass: "151.96", category: "Lanthanide", config: "[Xe] 4f⁷ 6s²", oxidation: "+3, +2", electronegativity: "1.2", melting: "1099 K", boiling: "1802 K", year: "1901" },
+            { number: 64, symbol: "Gd", name: "Gadolinium", mass: "157.25", category: "Lanthanide", config: "[Xe] 4f⁷ 5d¹ 6s²", oxidation: "+3", electronegativity: "1.2", melting: "1585 K", boiling: "3546 K", year: "1880" },
+            { number: 65, symbol: "Tb", name: "Terbium", mass: "158.93", category: "Lanthanide", config: "[Xe] 4f⁹ 6s²", oxidation: "+4, +3", electronegativity: "1.2", melting: "1629 K", boiling: "3503 K", year: "1843" },
+            { number: 66, symbol: "Dy", name: "Dysprosium", mass: "162.50", category: "Lanthanide", config: "[Xe] 4f¹⁰ 6s²", oxidation: "+3", electronegativity: "1.22", melting: "1680 K", boiling: "2840 K", year: "1886" },
+            { number: 67, symbol: "Ho", name: "Holmium", mass: "164.93", category: "Lanthanide", config: "[Xe] 4f¹¹ 6s²", oxidation: "+3", electronegativity: "1.23", melting: "1734 K", boiling: "2993 K", year: "1878" },
+            { number: 68, symbol: "Er", name: "Erbium", mass: "167.26", category: "Lanthanide", config: "[Xe] 4f¹² 6s²", oxidation: "+3", electronegativity: "1.24", melting: "1802 K", boiling: "3141 K", year: "1842" },
+            { number: 69, symbol: "Tm", name: "Thulium", mass: "168.93", category: "Lanthanide", config: "[Xe] 4f¹³ 6s²", oxidation: "+3", electronegativity: "1.25", melting: "1818 K", boiling: "2223 K", year: "1879" },
+            { number: 70, symbol: "Yb", name: "Ytterbium", mass: "173.05", category: "Lanthanide", config: "[Xe] 4f¹⁴ 6s²", oxidation: "+3, +2", electronegativity: "1.1", melting: "1097 K", boiling: "1469 K", year: "1878" },
+            { number: 71, symbol: "Lu", name: "Lutetium", mass: "174.97", category: "Lanthanide", config: "[Xe] 4f¹⁴ 5d¹ 6s²", oxidation: "+3", electronegativity: "1.27", melting: "1925 K", boiling: "3675 K", year: "1907" },
+            { number: 72, symbol: "Hf", name: "Hafnium", mass: "178.49", category: "Transition Metal", config: "[Xe] 4f¹⁴ 5d² 6s²", oxidation: "+4", electronegativity: "1.3", melting: "2506 K", boiling: "4876 K", year: "1923" },
+            { number: 73, symbol: "Ta", name: "Tantalum", mass: "180.95", category: "Transition Metal", config: "[Xe] 4f¹⁴ 5d³ 6s²", oxidation: "+5", electronegativity: "1.5", melting: "3290 K", boiling: "5731 K", year: "1802" },
+            { number: 74, symbol: "W", name: "Tungsten", mass: "183.84", category: "Transition Metal", config: "[Xe] 4f¹⁴ 5d⁴ 6s²", oxidation: "+6, +5, +4, +3, +2", electronegativity: "2.36", melting: "3695 K", boiling: "5828 K", year: "1783" },
+            { number: 75, symbol: "Re", name: "Rhenium", mass: "186.21", category: "Transition Metal", config: "[Xe] 4f¹⁴ 5d⁵ 6s²", oxidation: "+7, +6, +4, +2", electronegativity: "1.9", melting: "3459 K", boiling: "5869 K", year: "1925" },
+            { number: 76, symbol: "Os", name: "Osmium", mass: "190.23", category: "Transition Metal", config: "[Xe] 4f¹⁴ 5d⁶ 6s²", oxidation: "+8, +6, +4, +3, +2", electronegativity: "2.2", melting: "3306 K", boiling: "5285 K", year: "1803" },
+            { number: 77, symbol: "Ir", name: "Iridium", mass: "192.22", category: "Transition Metal", config: "[Xe] 4f¹⁴ 5d⁷ 6s²", oxidation: "+6, +4, +3, +2", electronegativity: "2.20", melting: "2719 K", boiling: "4701 K", year: "1803" },
+            { number: 78, symbol: "Pt", name: "Platinum", mass: "195.08", category: "Transition Metal", config: "[Xe] 4f¹⁴ 5d⁹ 6s¹", oxidation: "+4, +2", electronegativity: "2.28", melting: "2041.4 K", boiling: "4098 K", year: "1735" },
+            { number: 79, symbol: "Au", name: "Gold", mass: "196.97", category: "Transition Metal", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s¹", oxidation: "+3, +1", electronegativity: "2.54", melting: "1337.33 K", boiling: "3129 K", year: "Ancient" },
+            { number: 80, symbol: "Hg", name: "Mercury", mass: "200.59", category: "Transition Metal", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s²", oxidation: "+2, +1", electronegativity: "2.00", melting: "234.32 K", boiling: "629.88 K", year: "Ancient" },
+            { number: 81, symbol: "Tl", name: "Thallium", mass: "204.38", category: "Post-Transition Metal", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹", oxidation: "+3, +1", electronegativity: "1.62", melting: "577 K", boiling: "1746 K", year: "1861" },
+            { number: 82, symbol: "Pb", name: "Lead", mass: "207.2", category: "Post-Transition Metal", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²", oxidation: "+4, +2", electronegativity: "2.33", melting: "600.61 K", boiling: "2022 K", year: "Ancient" },
+            { number: 83, symbol: "Bi", name: "Bismuth", mass: "208.98", category: "Post-Transition Metal", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³", oxidation: "+5, +3", electronegativity: "2.02", melting: "544.7 K", boiling: "1837 K", year: "Ancient" },
+            { number: 84, symbol: "Po", name: "Polonium", mass: "209", category: "Metalloid", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴", oxidation: "+6, +4, +2", electronegativity: "2.0", melting: "527 K", boiling: "1235 K", year: "1898" },
+            { number: 85, symbol: "At", name: "Astatine", mass: "210", category: "Halogen", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵", oxidation: "+7, +5, +3, +1, -1", electronegativity: "2.2", melting: "575 K", boiling: "610 K", year: "1940" },
+            { number: 86, symbol: "Rn", name: "Radon", mass: "222", category: "Noble Gas", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶", oxidation: "0", electronegativity: "N/A", melting: "202 K", boiling: "211.3 K", year: "1900" },
+            { number: 87, symbol: "Fr", name: "Francium", mass: "223", category: "Alkali Metal", config: "[Rn] 7s¹", oxidation: "+1", electronegativity: "0.7", melting: "300 K", boiling: "950 K", year: "1939" },
+            { number: 88, symbol: "Ra", name: "Radium", mass: "226", category: "Alkaline Earth Metal", config: "[Rn] 7s²", oxidation: "+2", electronegativity: "0.9", melting: "973 K", boiling: "2010 K", year: "1898" },
+            { number: 89, symbol: "Ac", name: "Actinium", mass: "227", category: "Actinide", config: "[Rn] 6d¹ 7s²", oxidation: "+3", electronegativity: "1.1", melting: "1323 K", boiling: "3471 K", year: "1899" },
+            { number: 104, symbol: "Rf", name: "Rutherfordium", mass: "267", category: "Transition Metal", config: "[Rn] 5f¹⁴ 6d² 7s²", oxidation: "+4", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1969" },
+            { number: 105, symbol: "Db", name: "Dubnium", mass: "268", category: "Transition Metal", config: "[Rn] 5f¹⁴ 6d³ 7s²", oxidation: "+5, +4", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1970" },
+            { number: 106, symbol: "Sg", name: "Seaborgium", mass: "269", category: "Transition Metal", config: "[Rn] 5f¹⁴ 6d⁴ 7s²", oxidation: "+6, +5", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1974" },
+            { number: 107, symbol: "Bh", name: "Bohrium", mass: "270", category: "Transition Metal", config: "[Rn] 5f¹⁴ 6d⁵ 7s²", oxidation: "+7, +5", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1981" },
+            { number: 108, symbol: "Hs", name: "Hassium", mass: "269", category: "Transition Metal", config: "[Rn] 5f¹⁴ 6d⁶ 7s²", oxidation: "+8, +6", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1984" },
+            { number: 109, symbol: "Mt", name: "Meitnerium", mass: "278", category: "Transition Metal", config: "[Rn] 5f¹⁴ 6d⁷ 7s²", oxidation: "+9, +6, +3", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1982" },
+            { number: 110, symbol: "Ds", name: "Darmstadtium", mass: "281", category: "Transition Metal", config: "[Rn] 5f¹⁴ 6d⁹ 7s¹", oxidation: "+8, +6, +4", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1994" },
+            { number: 111, symbol: "Rg", name: "Roentgenium", mass: "282", category: "Transition Metal", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s¹", oxidation: "+5, +3", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1994" },
+            { number: 112, symbol: "Cn", name: "Copernicium", mass: "285", category: "Transition Metal", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s²", oxidation: "+2", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1996" },
+            { number: 113, symbol: "Nh", name: "Nihonium", mass: "286", category: "Post-Transition Metal", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p¹", oxidation: "+3, +1", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "2004" },
+            { number: 114, symbol: "Fl", name: "Flerovium", mass: "289", category: "Post-Transition Metal", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²", oxidation: "+4, +2", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "1999" },
+            { number: 115, symbol: "Mc", name: "Moscovium", mass: "290", category: "Post-Transition Metal", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³", oxidation: "+3, +1", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "2003" },
+            { number: 116, symbol: "Lv", name: "Livermorium", mass: "293", category: "Post-Transition Metal", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁴", oxidation: "+4, +2", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "2000" },
+            { number: 117, symbol: "Ts", name: "Tennessine", mass: "294", category: "Halogen", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵", oxidation: "+7, +5, +3, +1", electronegativity: "N/A", melting: "N/A", boiling: "N/A", year: "2010" },
+            { number: 90, symbol: "Th", name: "Thorium", mass: "232.04", category: "Actinide", config: "[Rn] 6d² 7s²", oxidation: "+4", electronegativity: "1.3", melting: "2023 K", boiling: "5061 K", year: "1829" },
+            { number: 91, symbol: "Pa", name: "Protactinium", mass: "231.04", category: "Actinide", config: "[Rn] 5f² 6d¹ 7s²", oxidation: "+5, +4", electronegativity: "1.5", melting: "1841 K", boiling: "4300 K", year: "1913" },
+            { number: 92, symbol: "U", name: "Uranium", mass: "238.03", category: "Actinide", config: "[Rn] 5f³ 6d¹ 7s²", oxidation: "+6, +5, +4, +3", electronegativity: "1.38", melting: "1405.3 K", boiling: "4404 K", year: "1789" },
+            { number: 93, symbol: "Np", name: "Neptunium", mass: "237", category: "Actinide", config: "[Rn] 5f⁴ 6d¹ 7s²", oxidation: "+7, +6, +5, +4, +3", electronegativity: "1.36", melting: "917 K", boiling: "4273 K", year: "1940" },
+            { number: 94, symbol: "Pu", name: "Plutonium", mass: "244", category: "Actinide", config: "[Rn] 5f⁶ 7s²", oxidation: "+7, +6, +5, +4, +3", electronegativity: "1.28", melting: "912.5 K", boiling: "3501 K", year: "1940" },
+            { number: 95, symbol: "Am", name: "Americium", mass: "243", category: "Actinide", config: "[Rn] 5f⁷ 7s²", oxidation: "+7, +6, +5, +4, +3", electronegativity: "1.13", melting: "1449 K", boiling: "2880 K", year: "1944" },
+            { number: 96, symbol: "Cm", name: "Curium", mass: "247", category: "Actinide", config: "[Rn] 5f⁷ 6d¹ 7s²", oxidation: "+4, +3", electronegativity: "1.28", melting: "1613 K", boiling: "3383 K", year: "1944" },
+            { number: 97, symbol: "Bk", name: "Berkelium", mass: "247", category: "Actinide", config: "[Rn] 5f⁹ 7s²", oxidation: "+4, +3", electronegativity: "1.3", melting: "1259 K", boiling: "2900 K", year: "1949" },
+            { number: 98, symbol: "Cf", name: "Californium", mass: "251", category: "Actinide", config: "[Rn] 5f¹⁰ 7s²", oxidation: "+4, +3", electronegativity: "1.3", melting: "1173 K", boiling: "1743 K", year: "1950" },
+            { number: 99, symbol: "Es", name: "Einsteinium", mass: "252", category: "Actinide", config: "[Rn] 5f¹¹ 7s²", oxidation: "+3", electronegativity: "1.3", melting: "1133 K", boiling: "1269 K", year: "1952" },
+            { number: 100, symbol: "Fm", name: "Fermium", mass: "257", category: "Actinide", config: "[Rn] 5f¹² 7s²", oxidation: "+3", electronegativity: "1.3", melting: "1800 K", boiling: "N/A", year: "1952" },
+            { number: 101, symbol: "Md", name: "Mendelevium", mass: "258", category: "Actinide", config: "[Rn] 5f¹³ 7s²", oxidation: "+3, +2", electronegativity: "1.3", melting: "1100 K", boiling: "N/A", year: "1955" },
+            { number: 102, symbol: "No", name: "Nobelium", mass: "259", category: "Actinide", config: "[Rn] 5f¹⁴ 7s²", oxidation: "+3, +2", electronegativity: "1.3", melting: "1100 K", boiling: "N/A", year: "1958" },
+            { number: 103, symbol: "Lr", name: "Lawrencium", mass: "262", category: "Actinide", config: "[Rn] 5f¹⁴ 6d¹ 7s²", oxidation: "+3", electronegativity: "1.3", melting: "1900 K", boiling: "N/A", year: "1961" }
+        ];
+    </script>
+    
+<div class="chatbot-icon" id="chatbot-icon">
+    <img src="Chatbot_icon.png" alt="Chatbot">
+</div>
+
+<div class="chatbot-popup" id="chatbot-popup">
+    <div class="chatbot-header">
+        <h3>Catalyzt-ChatBot</h3>
+        <button id="close-chatbot">×</button>
+    </div>
+    <div class="chatbot-body" id="chatbot-body">
+        <div id="chatbot-messages"></div>
+    </div>
+    <div class="chatbot-input">
+        <input type="text" id="chatbot-input" placeholder="Ask me anything...">
+        <button id="send-message">Send</button>
+    </div>
+</div>
+<script>
+const chatbotIcon = document.getElementById("chatbot-icon");
+const chatbotPopup = document.getElementById("chatbot-popup");
+const closeChatbot = document.getElementById("close-chatbot");
+
+chatbotIcon.addEventListener("click", () => {
+    chatbotPopup.style.display = "block";
+});
+
+closeChatbot.addEventListener("click", () => {
+    chatbotPopup.style.display = "none";
+});
+
+const chatbotInput = document.getElementById("chatbot-input");
+const sendMessageButton = document.getElementById("send-message");
+const chatbotMessages = document.getElementById("chatbot-messages");
+
+sendMessageButton.addEventListener("click", () => {
+    const message = chatbotInput.value.trim();
+    if (message) {
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        chatbotMessages.appendChild(messageElement);
+        chatbotInput.value = ""; // Clear input
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto-scroll
+    }
+});
+
+chatbotInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        sendMessageButton.click();
+    }
+});
+</script>
+    <footer>
+        <p>&copy; 2025 IntelliChem Lab | Designed for OLabs Accessibility</p>
+    </footer>
+</body>
+</html>

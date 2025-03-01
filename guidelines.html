@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guidelines - IntelliChem Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background: linear-gradient(135deg, #0a192f, #1c2b4a);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .guidelines-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .guidelines-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .guidelines-section h2 {
+            color: #00eaff;
+            margin-bottom: 15px;
+        }
+
+        .guidelines-section h3 {
+            color: #00eaff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .guidelines-section p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .guidelines-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .guidelines-section ul li {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guidelines-section ul li::before {
+            content: "•";
+            color: #00eaff;
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .guidelines-section ol {
+            list-style: none;
+            padding: 0;
+            counter-reset: step-counter;
+        }
+
+        .guidelines-section ol li {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            counter-increment: step-counter;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guidelines-section ol li::before {
+            content: counter(step-counter);
+            color: #00eaff;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+.chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.chatbot-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.chatbot-popup {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background-color: #FFFFFF; 
+    border: 1px solid #E0E0E0; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #4F46E5; 
+    color: #FFFFFF; 
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.chatbot-header button {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.chatbot-body {
+    padding: 1rem;
+    height: 200px;
+    overflow-y: auto;
+    background-color: #F9FAFB;
+    color: #1F2937;
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #E0E0E0;
+    background-color: #FFFFFF; 
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #E0E0E0; 
+    border-radius: 4px;
+    background-color: #FFFFFF; 
+    color: #1F2937; 
+}
+
+.chatbot-input button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #4F46E5; 
+    color: #FFFFFF; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🔬 IntelliChem Lab</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="periodic_table.html">Periodic Table</a></li>
+            <li><a href="experiments.html">Experiments</a></li>
+            <li><a href="quizzes.html">Quizzes</a></li>
+        </ul>
+    </nav>
+
+    <div class="guidelines-container">
+        <h1>📜 Guidelines</h1>
+        <div class="guidelines-section">
+            <h2>General Guidelines</h2>
+            <p>Welcome to IntelliChem Lab! Follow these guidelines to make the most of your experience:</p>
+            <ul>
+                <li>Always read the experiment instructions carefully before starting.</li>
+                <li>Ensure you have all the required materials before beginning an experiment.</li>
+                <li>Follow safety protocols at all times.</li>
+                <li>Report any issues or bugs to the support team.</li>
+            </ul>
+        </div>
+        <div class="guidelines-section">
+            <h2>Experiment Guidelines</h2>
+            <p>Here are some tips for conducting experiments effectively:</p>
+            <ol>
+                <li>Set up your workspace in a clean and organized manner.</li>
+                <li>Wear appropriate safety gear (e.g., gloves, goggles).</li>
+                <li>Follow the step-by-step instructions provided for each experiment.</li>
+                <li>Record your observations and results accurately.</li>
+                <li>Clean up your workspace after completing the experiment.</li>
+            </ol>
+        </div>
+        <div class="guidelines-section">
+            <h2>Quiz Guidelines</h2>
+            <p>Follow these tips to excel in quizzes:</p>
+            <ul>
+                <li>Review the experiment and theory before attempting a quiz.</li>
+                <li>Read each question carefully before answering.</li>
+                <li>Use the hints provided if you're unsure about an answer.</li>
+                <li>Check your answers before submitting the quiz.</li>
+            </ul>
+        </div>
+        <div class="guidelines-section">
+            <h2>Safety Guidelines</h2>
+            <p>Safety is our top priority. Follow these rules to stay safe:</p>
+            <ul>
+                <li>Never perform experiments without adult supervision (if required).</li>
+                <li>Avoid direct contact with chemicals.</li>
+                <li>Use proper ventilation when working with gases or fumes.</li>
+                <li>In case of an accident, report it immediately and seek help.</li>
+            </ul>
+        </div>
+        <div class="guidelines-section">
+            <h2>IoT Integration Guidelines</h2>
+            <p>Learn how to use IoT devices effectively in your experiments:</p>
+            <ol>
+                <li>Connect the IoT sensors to your device as per the instructions.</li>
+                <li>Ensure the sensors are calibrated before use.</li>
+                <li>Monitor real-time data on the dashboard.</li>
+                <li>Interpret the data to draw conclusions from your experiments.</li>
+            </ol>
+        </div>
+    </div>
+<div class="chatbot-icon" id="chatbot-icon">
+    <img src="Chatbot_icon.png" alt="Chatbot">
+</div>
+
+<div class="chatbot-popup" id="chatbot-popup">
+    <div class="chatbot-header">
+        <h3>Catalyzt-ChatBot</h3>
+        <button id="close-chatbot">×</button>
+    </div>
+    <div class="chatbot-body" id="chatbot-body">
+        <div id="chatbot-messages"></div>
+    </div>
+    <div class="chatbot-input">
+        <input type="text" id="chatbot-input" placeholder="Ask me anything...">
+        <button id="send-message">Send</button>
+    </div>
+</div>
+    <footer>
+        <p>&copy; 2025 IntelliChem Lab | Designed for OLabs Accessibility</p>
+    </footer>
+    <script>
+const chatbotIcon = document.getElementById("chatbot-icon");
+const chatbotPopup = document.getElementById("chatbot-popup");
+const closeChatbot = document.getElementById("close-chatbot");
+
+chatbotIcon.addEventListener("click", () => {
+    chatbotPopup.style.display = "block";
+});
+
+closeChatbot.addEventListener("click", () => {
+    chatbotPopup.style.display = "none";
+});
+
+const chatbotInput = document.getElementById("chatbot-input");
+const sendMessageButton = document.getElementById("send-message");
+const chatbotMessages = document.getElementById("chatbot-messages");
+
+sendMessageButton.addEventListener("click", () => {
+    const message = chatbotInput.value.trim();
+    if (message) {
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        chatbotMessages.appendChild(messageElement);
+        chatbotInput.value = ""; // Clear input
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto-scroll
+    }
+});
+
+chatbotInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        sendMessageButton.click();
+    }
+});
+    </script>
+</body>
+</html>

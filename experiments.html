@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiments - IntelliChem Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .experiments-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .class-selector {
+            margin-bottom: 20px;
+        }
+
+        .class-selector label {
+            font-size: 1.2em;
+            color: #00eaff;
+            margin-right: 10px;
+        }
+
+        .class-selector select {
+            padding: 10px;
+            border-radius: 5px;
+            background: rgba(229, 226, 226, 0.896);
+            color: 0 0 10px rgba(0, 255, 255, 0.3);;
+            border: 1px solid #00eaff;
+            cursor: pointer;
+        }
+
+        .experiment-list {
+            display: none;
+        }
+
+        .experiment-list.active {
+            display: block; 
+        }
+
+        .experiment-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .experiment-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .experiment-details {
+            display: none; 
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+            text-align: left; 
+        }
+
+        .experiment-details.active {
+            display: block; 
+        }
+
+        .experiment-details h3 {
+            color: #00eaff;
+            margin-bottom: 15px;
+        }
+
+        .experiment-details p {
+            margin-bottom: 10px;
+        }
+
+        .iot-integration {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .iot-integration h4 {
+            color: #00eaff;
+            margin-bottom: 10px;
+        }
+
+        .iot-data {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .iot-data div {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .iot-data div span {
+            font-weight: bold;
+            color: #00eaff;
+        }
+.chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.chatbot-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.chatbot-popup {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #4F46E5; 
+    color: #FFFFFF; 
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.chatbot-header button {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.chatbot-body {
+    padding: 1rem;
+    height: 200px;
+    overflow-y: auto;
+    background-color: #F9FAFB; 
+    color: #1F2937; 
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #E0E0E0; 
+    background-color: #FFFFFF; 
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #E0E0E0; 
+    border-radius: 4px;
+    background-color: #FFFFFF; 
+    color: #1F2937; 
+}
+
+.chatbot-input button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #4F46E5; 
+    color: #FFFFFF; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    .listen-button {
+    background-color: #4F46E5;
+    color: #FFFFFF; 
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+.listen-button:hover {
+    background-color: #4338CA;
+}
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🔬 IntelliChem Lab</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="periodic_table.html">Periodic Table</a></li>
+            <li><a href="experiments.html">Experiments</a></li>
+            <li><a href="quizzes.html">Quizzes</a></li>
+        </ul>
+    </nav>
+
+    <div class="experiments-container">
+        <h1>⚗️ Experiments</h1>
+        <div class="class-selector">
+            <label for="class-select">Select Class:</label>
+            <select id="class-select" onchange="showExperiments()">
+                <option value="">-- Select a Class --</option>
+                <option value="6th">6th Grade</option>
+                <option value="7th">7th Grade</option>
+                <option value="8th">8th Grade</option>
+                <option value="9th">9th Grade</option>
+                <option value="10th">10th Grade</option>
+                <option value="11th">11th Grade</option>
+                <option value="12th">12th Grade</option>
+            </select>
+        </div>
+
+        <div id="experiment-6th" class="experiment-list">
+            <div class="experiment-item" onclick="showExperimentDetails('exp-6th-1')">
+                Experiment 1: Acid-Base Titration
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-6th-2')">
+                Experiment 2: Electrolysis of Water
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-6th-3')">
+                Experiment 3: Testing for Starch
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-6th-4')">
+                Experiment 4: Rusting of Iron
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-6th-5')">
+                Experiment 5: Separation of Mixtures
+            </div>
+        </div>
+
+        <div id="experiment-7th" class="experiment-list">
+            <div class="experiment-item" onclick="showExperimentDetails('exp-7th-1')">
+                Experiment 1: Crystallization of Copper Sulfate
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-7th-2')">
+                Experiment 2: Burning of Magnesium Ribbon
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-7th-3')">
+                Experiment 3: Preparation of Oxygen Gas
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-7th-4')">
+                Experiment 4: Testing for Carbon Dioxide
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-7th-5')">
+                Experiment 5: Reaction of Acids with Metals
+            </div>
+        </div>
+
+        <div id="experiment-8th" class="experiment-list">
+            <div class="experiment-item" onclick="showExperimentDetails('exp-8th-1')">
+                Experiment 1: Electrolysis of Water
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-8th-2')">
+                Experiment 2: Reaction of Acids with Bases
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-8th-3')">
+                Experiment 3: Preparation of Hydrogen Gas
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-8th-4')">
+                Experiment 4: Testing for Starch in Food
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-8th-5')">
+                Experiment 5: Effect of Heat on Different Substances
+            </div>
+        </div>
+
+        <div id="experiment-9th" class="experiment-list">
+            <div class="experiment-item" onclick="showExperimentDetails('exp-9th-1')">
+                Experiment 1: Laws of Chemical Combination
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-9th-2')">
+                Experiment 2: Properties of Acids and Bases
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-9th-3')">
+                Experiment 3: Preparation of Carbon Dioxide
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-9th-4')">
+                Experiment 4: Testing for Water of Crystallization
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-9th-5')">
+                Experiment 5: Reaction of Metals with Water
+            </div>
+        </div>
+
+        <div id="experiment-10th" class="experiment-list">
+            <div class="experiment-item" onclick="showExperimentDetails('exp-10th-1')">
+                Experiment 1: Oxidation and Reduction Reactions
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-10th-2')">
+                Experiment 2: Properties of Ionic and Covalent Compounds
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-10th-3')">
+                Experiment 3: Preparation of Soap
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-10th-4')">
+                Experiment 4: Testing for Alkenes and Alkanes
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-10th-5')">
+                Experiment 5: Electroplating
+            </div>
+        </div>
+
+        <div id="experiment-11th" class="experiment-list">
+            <div class="experiment-item" onclick="showExperimentDetails('exp-11th-1')">
+                Experiment 1: Determination of pH of Solutions
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-11th-2')">
+                Experiment 2: Titration of Acids and Bases
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-11th-3')">
+                Experiment 3: Preparation of Esters
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-11th-4')">
+                Experiment 4: Testing for Functional Groups
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-11th-5')">
+                Experiment 5: Study of Reaction Rates
+            </div>
+        </div>
+
+        <div id="experiment-12th" class="experiment-list">
+            <div class="experiment-item" onclick="showExperimentDetails('exp-12th-1')">
+                Experiment 1: Electrochemical Cells
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-12th-2')">
+                Experiment 2: Preparation of Amines
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-12th-3')">
+                Experiment 3: Chromatography
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-12th-4')">
+                Experiment 4: Testing for Carbohydrates, Proteins, and Fats
+            </div>
+            <div class="experiment-item" onclick="showExperimentDetails('exp-12th-5')">
+                Experiment 5: Synthesis of Aspirin
+            </div>
+        </div>
+            </div>
+
+            <div id="exp-6th-1" class="experiment-details">
+                <h3>Experiment 1: Acid-Base Titration</h3>
+                <p><strong>Objective:</strong> To determine the concentration of an acid using a base of known concentration.</p>
+                <p><strong>Materials:</strong> Burette, pipette, conical flask, phenolphthalein indicator, acid, base.</p>
+                <p><strong>Procedure:</strong></p>
+                <ol>
+                    <li>Fill the burette with the base solution.</li>
+                    <li>Pipette 10 mL of the acid into a conical flask.</li>
+                    <li>Add 2-3 drops of phenolphthalein indicator to the acid.</li>
+                    <li>Titrate the acid with the base until the solution turns pink.</li>
+                    <li>Record the volume of base used.</li>
+                </ol>
+                <button class="listen-button" onclick="readInstructions('exp-6th-1')">Listen to Instructions</button>
+                <div class="iot-integration">
+                    <h4>IoT Integration:</h4>
+                    <div class="iot-data">
+                        <div><span>pH:</span> 8.5 (Alkaline)</div>
+                        <div><span>Temperature:</span> 25°C</div>
+                        <div><span>Gas Safety:</span> Safe</div>
+                    </div>
+                </div>
+            </div>
+
+    <div id="exp-6th-2" class="experiment-details">
+        <h3>Experiment 2: Electrolysis of Water</h3>
+        <p><strong>Objective:</strong> To demonstrate the decomposition of water into hydrogen and oxygen gases.</p>
+        <p><strong>Materials:</strong> Electrolysis apparatus, water, battery, electrodes.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Fill the electrolysis apparatus with water.</li>
+            <li>Connect the electrodes to the battery.</li>
+            <li>Observe the formation of bubbles at the electrodes.</li>
+            <li>Test the gases produced using a burning splint.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-6th-2')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div>
+                    <span>pH:</span> 7.0 (Neutral)
+                </div>
+                <div>
+                    <span>Temperature:</span> 30°C
+                </div>
+                <div>
+                    <span>Gas Safety:</span> Danger (Hydrogen Gas)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-6th-3" class="experiment-details">
+        <h3>Experiment 3: Testing for Starch</h3>
+        <p><strong>Objective:</strong> To detect the presence of starch in food samples.</p>
+        <p><strong>Materials:</strong> Iodine solution, food samples (bread, potato, rice), dropper, white tile.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Place small pieces of food samples on a white tile.</li>
+            <li>Add a few drops of iodine solution to each sample.</li>
+            <li>Observe the color change: a blue-black color indicates the presence of starch.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-6th-3')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> Not applicable</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-6th-4" class="experiment-details">
+        <h3>Experiment 4: Rusting of Iron</h3>
+        <p><strong>Objective:</strong> To investigate the conditions required for rusting of iron.</p>
+        <p><strong>Materials:</strong> Iron nails, test tubes, water, oil, calcium chloride (drying agent).</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Place iron nails in three test tubes:
+                <ul>
+                    <li>Tube 1: Nail exposed to air and water.</li>
+                    <li>Tube 2: Nail exposed to air only (add calcium chloride to absorb moisture).</li>
+                    <li>Tube 3: Nail submerged in boiled water covered with oil to exclude air.</li>
+                </ul>
+            </li>
+            <li>Observe the nails over several days for rust formation.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-6th-4')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 6.5 (Slightly acidic due to rust)</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-6th-5" class="experiment-details">
+        <h3>Experiment 5: Separation of Mixtures</h3>
+        <p><strong>Objective:</strong> To separate components of a mixture using physical methods.</p>
+        <p><strong>Materials:</strong> Sand, salt, water, beaker, filter paper, funnel, evaporating dish, Bunsen burner.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Mix sand and salt in a beaker of water. Stir until the salt dissolves.</li>
+            <li>Filter the mixture to separate sand from the saltwater.</li>
+            <li>Heat the saltwater in an evaporating dish to evaporate the water, leaving behind salt.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-6th-5')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 7.0 (Neutral)</div>
+                <div><span>Temperature:</span> 100°C (Boiling point of water)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+        <div id="exp-7th-1" class="experiment-details">
+            <h3>Experiment 1: Crystallization of Copper Sulfate</h3>
+            <p><strong>Objective:</strong> To obtain pure copper sulfate crystals from a solution.</p>
+            <p><strong>Materials:</strong> Copper sulfate solution, beaker, Bunsen burner, evaporating dish, filter paper.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Heat the copper sulfate solution in an evaporating dish until it becomes saturated.</li>
+                <li>Allow the solution to cool slowly.</li>
+                <li>Observe the formation of blue copper sulfate crystals.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-7th-1')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> 4.5 (Acidic)</div>
+                    <div><span>Temperature:</span> 60°C (During heating)</div>
+                    <div><span>Gas Safety:</span> Safe</div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="exp-7th-2" class="experiment-details">
+            <h3>Experiment 2: Burning of Magnesium Ribbon</h3>
+            <p><strong>Objective:</strong> To observe the reaction of magnesium with oxygen.</p>
+            <p><strong>Materials:</strong> Magnesium ribbon, Bunsen burner, tongs, safety goggles.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Hold the magnesium ribbon with tongs and ignite it using a Bunsen burner.</li>
+                <li>Observe the bright white light and the formation of magnesium oxide ash.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-7th-2')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> Not applicable</div>
+                    <div><span>Temperature:</span> 1000°C (Combustion temperature)</div>
+                    <div><span>Gas Safety:</span> Danger (Bright light and heat)</div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="exp-7th-3" class="experiment-details">
+            <h3>Experiment 3: Preparation of Oxygen Gas</h3>
+            <p><strong>Objective:</strong> To prepare oxygen gas by decomposing hydrogen peroxide.</p>
+            <p><strong>Materials:</strong> Hydrogen peroxide, manganese dioxide (catalyst), test tube, delivery tube, water trough.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Add hydrogen peroxide to a test tube with manganese dioxide.</li>
+                <li>Collect the oxygen gas over water in an inverted test tube.</li>
+                <li>Test the gas with a glowing splint; it will relight.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-7th-3')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> 7.0 (Neutral)</div>
+                    <div><span>Temperature:</span> 30°C (Slight increase due to reaction)</div>
+                    <div><span>Gas Safety:</span> Safe</div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="exp-7th-4" class="experiment-details">
+            <h3>Experiment 4: Testing for Carbon Dioxide</h3>
+            <p><strong>Objective:</strong> To identify carbon dioxide gas using limewater.</p>
+            <p><strong>Materials:</strong> Limewater, calcium carbonate, hydrochloric acid, delivery tube.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Add calcium carbonate to hydrochloric acid in a flask.</li>
+                <li>Pass the gas produced through limewater.</li>
+                <li>Observe the limewater turning milky, indicating the presence of CO₂.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-7th-4')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> 6.0 (Acidic due to CO₂)</div>
+                    <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                    <div><span>Gas Safety:</span> Safe</div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="exp-7th-5" class="experiment-details">
+            <h3>Experiment 5: Reaction of Acids with Metals</h3>
+            <p><strong>Objective:</strong> To observe the reaction of acids with metals and produce hydrogen gas.</p>
+            <p><strong>Materials:</strong> Hydrochloric acid, zinc granules, test tube, burning splint.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Add zinc granules to hydrochloric acid in a test tube.</li>
+                <li>Observe the effervescence and collect the gas.</li>
+                <li>Test the gas with a burning splint; it will produce a popping sound.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-7th-5')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> 2.0 (Highly acidic)</div>
+                    <div><span>Temperature:</span> 30°C (Slight increase due to reaction)</div>
+                    <div><span>Gas Safety:</span> Danger (Hydrogen gas is flammable)</div>
+                </div>
+            </div>
+        </div>
+        <div id="exp-8th-1" class="experiment-details">
+            <h3>Experiment 1: Electrolysis of Water</h3>
+            <p><strong>Objective:</strong> To decompose water into hydrogen and oxygen gases using electricity.</p>
+            <p><strong>Materials:</strong> Electrolysis apparatus, distilled water, dilute sulfuric acid, battery, electrodes.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Fill the apparatus with water and add a few drops of sulfuric acid.</li>
+                <li>Connect the electrodes to the battery and observe gas formation.</li>
+                <li>Test the gases: hydrogen with a burning splint and oxygen with a glowing splint.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-8th-1')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> 7.0 (Neutral)</div>
+                    <div><span>Temperature:</span> 30°C (Slight increase due to current)</div>
+                    <div><span>Gas Safety:</span> Danger (Hydrogen is flammable)</div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="exp-8th-2" class="experiment-details">
+            <h3>Experiment 2: Reaction of Acids with Bases</h3>
+            <p><strong>Objective:</strong> To neutralize an acid with a base and observe the reaction.</p>
+            <p><strong>Materials:</strong> Hydrochloric acid, sodium hydroxide, phenolphthalein, beaker.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Add a few drops of phenolphthalein to the base.</li>
+                <li>Slowly add the acid to the base while stirring.</li>
+                <li>Observe the color change from pink to colorless at the endpoint.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-8th-2')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> 7.0 (Neutral at endpoint)</div>
+                    <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                    <div><span>Gas Safety:</span> Safe</div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="exp-8th-3" class="experiment-details">
+            <h3>Experiment 3: Preparation of Hydrogen Gas</h3>
+            <p><strong>Objective:</strong> To prepare hydrogen gas by reacting a metal with an acid.</p>
+            <p><strong>Materials:</strong> Zinc granules, hydrochloric acid, test tube, delivery tube.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Add zinc granules to hydrochloric acid in a test tube.</li>
+                <li>Collect the hydrogen gas over water.</li>
+                <li>Test the gas with a burning splint; it will produce a popping sound.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-8th-3')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> 2.0 (Highly acidic)</div>
+                    <div><span>Temperature:</span> 30°C (Slight increase due to reaction)</div>
+                    <div><span>Gas Safety:</span> Danger (Hydrogen is flammable)</div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="exp-8th-4" class="experiment-details">
+            <h3>Experiment 4: Testing for Starch in Food</h3>
+            <p><strong>Objective:</strong> To detect the presence of starch in food samples.</p>
+            <p><strong>Materials:</strong> Iodine solution, food samples (bread, potato, rice), dropper, white tile.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Place small pieces of food samples on a white tile.</li>
+                <li>Add a few drops of iodine solution to each sample.</li>
+                <li>Observe the color change: a blue-black color indicates the presence of starch.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-8th-4')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> Not applicable</div>
+                    <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                    <div><span>Gas Safety:</span> Safe</div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="exp-8th-5" class="experiment-details">
+            <h3>Experiment 5: Effect of Heat on Different Substances</h3>
+            <p><strong>Objective:</strong> To observe the effect of heat on various substances.</p>
+            <p><strong>Materials:</strong> Sugar, salt, wax, Bunsen burner, test tubes.</p>
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Heat each substance in a test tube using a Bunsen burner.</li>
+                <li>Observe the changes: sugar caramelizes, salt remains unchanged, wax melts.</li>
+            </ol>
+            <button class="listen-button" onclick="readInstructions('exp-8th-5')">Listen to Instructions</button>
+            <div class="iot-integration">
+                <h4>IoT Integration:</h4>
+                <div class="iot-data">
+                    <div><span>pH:</span> Not applicable</div>
+                    <div><span>Temperature:</span> 100°C (Boiling point of water)</div>
+                    <div><span>Gas Safety:</span> Safe</div>
+                </div>
+            </div>
+        </div>
+    <div id="exp-9th-1" class="experiment-details">
+        <h3>Experiment 1: Laws of Chemical Combination</h3>
+        <p><strong>Objective:</strong> To verify the law of conservation of mass in a chemical reaction.</p>
+        <p><strong>Materials:</strong> Barium chloride, sodium sulfate, beaker, weighing balance.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Weigh the reactants (barium chloride and sodium sulfate) separately.</li>
+            <li>Mix the reactants in a beaker and observe the formation of a white precipitate (barium sulfate).</li>
+            <li>Weigh the products and compare the total mass before and after the reaction.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-9th-1')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 7.0 (Neutral)</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-9th-2" class="experiment-details">
+        <h3>Experiment 2: Properties of Acids and Bases</h3>
+        <p><strong>Objective:</strong> To study the properties of acids and bases using indicators.</p>
+        <p><strong>Materials:</strong> Hydrochloric acid, sodium hydroxide, litmus paper, phenolphthalein, universal indicator.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Test the acids and bases with litmus paper: acids turn blue litmus red, and bases turn red litmus blue.</li>
+            <li>Add phenolphthalein to the base; it turns pink.</li>
+            <li>Use a universal indicator to determine the pH of the solutions.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-9th-2')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 2.0 (Acidic) / 12.0 (Basic)</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-9th-3" class="experiment-details">
+        <h3>Experiment 3: Preparation of Carbon Dioxide</h3>
+        <p><strong>Objective:</strong> To prepare carbon dioxide gas by reacting marble chips with hydrochloric acid.</p>
+        <p><strong>Materials:</strong> Marble chips, hydrochloric acid, delivery tube, limewater.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Add marble chips to hydrochloric acid in a flask.</li>
+            <li>Pass the gas produced through limewater.</li>
+            <li>Observe the limewater turning milky, indicating the presence of CO₂.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-9th-3')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 6.0 (Acidic due to CO₂)</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-9th-4" class="experiment-details">
+        <h3>Experiment 4: Testing for Water of Crystallization</h3>
+        <p><strong>Objective:</strong> To determine the presence of water of crystallization in hydrated salts.</p>
+        <p><strong>Materials:</strong> Hydrated copper sulfate, test tube, Bunsen burner.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Heat hydrated copper sulfate in a test tube.</li>
+            <li>Observe the color change from blue to white, indicating the loss of water of crystallization.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-9th-4')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> Not applicable</div>
+                <div><span>Temperature:</span> 100°C (Boiling point of water)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-9th-5" class="experiment-details">
+        <h3>Experiment 5: Reaction of Metals with Water</h3>
+        <p><strong>Objective:</strong> To study the reaction of metals (sodium, calcium) with water.</p>
+        <p><strong>Materials:</strong> Sodium, calcium, water, beaker, safety goggles.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Add a small piece of sodium to water in a beaker.</li>
+            <li>Observe the vigorous reaction and formation of hydrogen gas.</li>
+            <li>Repeat with calcium and observe the slower reaction.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-9th-5')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 10.0 (Alkaline due to NaOH formation)</div>
+                <div><span>Temperature:</span> 30°C (Slight increase due to reaction)</div>
+                <div><span>Gas Safety:</span> Danger (Hydrogen gas is flammable)</div>
+            </div>
+        </div>
+    </div>
+    <div id="exp-10th-1" class="experiment-details">
+        <h3>Experiment 1: Oxidation and Reduction Reactions</h3>
+        <p><strong>Objective:</strong> To demonstrate oxidation and reduction reactions using copper oxide and hydrogen gas.</p>
+        <p><strong>Materials:</strong> Copper oxide, hydrogen gas, test tube, Bunsen burner.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Heat copper oxide in a test tube.</li>
+            <li>Pass hydrogen gas over the heated copper oxide.</li>
+            <li>Observe the color change from black to brown, indicating the reduction of copper oxide to copper.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-10th-1')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> Not applicable</div>
+                <div><span>Temperature:</span> 200°C (Heating temperature)</div>
+                <div><span>Gas Safety:</span> Danger (Hydrogen gas is flammable)</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-10th-2" class="experiment-details">
+        <h3>Experiment 2: Properties of Ionic and Covalent Compounds</h3>
+        <p><strong>Objective:</strong> To compare the properties of ionic and covalent compounds.</p>
+        <p><strong>Materials:</strong> Sodium chloride (ionic), sugar (covalent), water, conductivity apparatus.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Dissolve sodium chloride and sugar in water separately.</li>
+            <li>Test the conductivity of each solution using a conductivity apparatus.</li>
+            <li>Observe that ionic compounds conduct electricity, while covalent compounds do not.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-10th-2')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 7.0 (Neutral)</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-10th-3" class="experiment-details">
+        <h3>Experiment 3: Preparation of Soap</h3>
+        <p><strong>Objective:</strong> To prepare soap using the saponification process.</p>
+        <p><strong>Materials:</strong> Vegetable oil, sodium hydroxide, water, beaker, Bunsen burner.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Heat vegetable oil and sodium hydroxide in a beaker.</li>
+            <li>Stir the mixture until it thickens into soap.</li>
+            <li>Allow the soap to cool and solidify.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-10th-3')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 10.0 (Alkaline)</div>
+                <div><span>Temperature:</span> 60°C (Heating temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-10th-4" class="experiment-details">
+        <h3>Experiment 4: Testing for Alkenes and Alkanes</h3>
+        <p><strong>Objective:</strong> To distinguish between alkenes and alkanes using bromine water.</p>
+        <p><strong>Materials:</strong> Bromine water, cyclohexane (alkane), cyclohexene (alkene).</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Add bromine water to cyclohexane and cyclohexene separately.</li>
+            <li>Observe that bromine water decolorizes in the presence of cyclohexene (alkene) but not cyclohexane (alkane).</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-10th-4')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> Not applicable</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-10th-5" class="experiment-details">
+        <h3>Experiment 5: Electroplating</h3>
+        <p><strong>Objective:</strong> To electroplate a metal object with copper.</p>
+        <p><strong>Materials:</strong> Copper sulfate solution, metal object, battery, electrodes.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Connect the metal object to the negative terminal of the battery and a copper electrode to the positive terminal.</li>
+            <li>Immerse both in copper sulfate solution.</li>
+            <li>Observe the deposition of copper on the metal object.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-10th-5')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 4.5 (Acidic)</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+    <div id="exp-11th-1" class="experiment-details">
+        <h3>Experiment 1: Determination of pH of Solutions</h3>
+        <p><strong>Objective:</strong> To determine the pH of various solutions using a pH meter or universal indicator.</p>
+        <p><strong>Materials:</strong> pH meter, universal indicator, test solutions (acidic, basic, neutral).</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Calibrate the pH meter using buffer solutions.</li>
+            <li>Dip the pH meter into each test solution and record the pH value.</li>
+            <li>Alternatively, add a few drops of universal indicator to each solution and compare the color to the pH chart.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-11th-1')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 2.0 (Acidic) / 7.0 (Neutral) / 12.0 (Basic)</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-11th-2" class="experiment-details">
+        <h3>Experiment 2: Titration of Acids and Bases</h3>
+        <p><strong>Objective:</strong> To determine the concentration of an acid using a standard base solution.</p>
+        <p><strong>Materials:</strong> Burette, pipette, conical flask, phenolphthalein, hydrochloric acid, sodium hydroxide.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Fill the burette with the base solution.</li>
+            <li>Pipette 10 mL of the acid into a conical flask and add 2-3 drops of phenolphthalein.</li>
+            <li>Titrate the acid with the base until the solution turns pink.</li>
+            <li>Record the volume of base used and calculate the concentration of the acid.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-11th-2')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 8.5 (Alkaline at endpoint)</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-11th-3" class="experiment-details">
+        <h3>Experiment 3: Preparation of Esters</h3>
+        <p><strong>Objective:</strong> To prepare an ester (ethyl acetate) by reacting ethanol with acetic acid.</p>
+        <p><strong>Materials:</strong> Ethanol, acetic acid, concentrated sulfuric acid, test tube, water bath.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Mix ethanol and acetic acid in a test tube.</li>
+            <li>Add a few drops of concentrated sulfuric acid as a catalyst.</li>
+            <li>Heat the mixture in a water bath for 5-10 minutes.</li>
+            <li>Observe the fruity smell of the ester formed.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-11th-3')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 4.5 (Acidic)</div>
+                <div><span>Temperature:</span> 60°C (Heating temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-11th-4" class="experiment-details">
+        <h3>Experiment 4: Testing for Functional Groups</h3>
+        <p><strong>Objective:</strong> To identify functional groups in organic compounds using chemical tests.</p>
+        <p><strong>Materials:</strong> Bromine water, Fehling's solution, sodium bicarbonate, test compounds.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Test for alkenes using bromine water (decolorization indicates presence).</li>
+            <li>Test for aldehydes using Fehling's solution (red precipitate indicates presence).</li>
+            <li>Test for carboxylic acids using sodium bicarbonate (effervescence indicates presence).</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-11th-4')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> Not applicable</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-11th-5" class="experiment-details">
+        <h3>Experiment 5: Study of Reaction Rates</h3>
+        <p><strong>Objective:</strong> To study the effect of concentration and temperature on reaction rates.</p>
+        <p><strong>Materials:</strong> Sodium thiosulfate, hydrochloric acid, stopwatch, water bath.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Mix sodium thiosulfate and hydrochloric acid in a flask.</li>
+            <li>Observe the time taken for the solution to turn cloudy.</li>
+            <li>Repeat the experiment with different concentrations and temperatures.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-11th-5')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 2.0 (Acidic)</div>
+                <div><span>Temperature:</span> 30°C (Slight increase due to reaction)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+    <div id="exp-12th-1" class="experiment-details">
+        <h3>Experiment 1: Electrochemical Cells</h3>
+        <p><strong>Objective:</strong> To construct a simple electrochemical cell and measure its voltage.</p>
+        <p><strong>Materials:</strong> Zinc electrode, copper electrode, electrolyte (zinc sulfate and copper sulfate), voltmeter.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Set up the zinc and copper electrodes in their respective electrolyte solutions.</li>
+            <li>Connect the electrodes to a voltmeter.</li>
+            <li>Measure the voltage produced by the cell.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-12th-1')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> Not applicable</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-12th-2" class="experiment-details">
+        <h3>Experiment 2: Preparation of Amines</h3>
+        <p><strong>Objective:</strong> To prepare aniline by reducing nitrobenzene.</p>
+        <p><strong>Materials:</strong> Nitrobenzene, tin, hydrochloric acid, sodium hydroxide.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Mix nitrobenzene with tin and hydrochloric acid in a flask.</li>
+            <li>Heat the mixture until the reduction is complete.</li>
+            <li>Neutralize the solution with sodium hydroxide and extract the aniline.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-12th-2')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 10.0 (Alkaline)</div>
+                <div><span>Temperature:</span> 60°C (Heating temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-12th-3" class="experiment-details">
+        <h3>Experiment 3: Chromatography</h3>
+        <p><strong>Objective:</strong> To separate the components of a mixture using paper chromatography.</p>
+        <p><strong>Materials:</strong> Chromatography paper, solvent, ink or dye samples.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Spot the ink or dye samples on the chromatography paper.</li>
+            <li>Place the paper in a solvent and allow the solvent to rise.</li>
+            <li>Observe the separation of components based on their solubility.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-12th-3')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> Not applicable</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-12th-4" class="experiment-details">
+        <h3>Experiment 4: Testing for Carbohydrates, Proteins, and Fats</h3>
+        <p><strong>Objective:</strong> To identify carbohydrates, proteins, and fats in food samples.</p>
+        <p><strong>Materials:</strong> Benedict's solution, Biuret reagent, Sudan III stain, food samples.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Test for carbohydrates using Benedict's solution (orange precipitate indicates presence).</li>
+            <li>Test for proteins using Biuret reagent (violet color indicates presence).</li>
+            <li>Test for fats using Sudan III stain (red stain indicates presence).</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-12th-4')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> Not applicable</div>
+                <div><span>Temperature:</span> 25°C (Room temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp-12th-5" class="experiment-details">
+        <h3>Experiment 5: Synthesis of Aspirin</h3>
+        <p><strong>Objective:</strong> To synthesize aspirin from salicylic acid and acetic anhydride.</p>
+        <p><strong>Materials:</strong> Salicylic acid, acetic anhydride, concentrated sulfuric acid, water bath.</p>
+        <p><strong>Procedure:</strong></p>
+        <ol>
+            <li>Mix salicylic acid and acetic anhydride in a flask.</li>
+            <li>Add a few drops of concentrated sulfuric acid as a catalyst.</li>
+            <li>Heat the mixture in a water bath for 10-15 minutes.</li>
+            <li>Allow the mixture to cool and crystallize.</li>
+        </ol>
+        <button class="listen-button" onclick="readInstructions('exp-12th-5')">Listen to Instructions</button>
+        <div class="iot-integration">
+            <h4>IoT Integration:</h4>
+            <div class="iot-data">
+                <div><span>pH:</span> 4.5 (Acidic)</div>
+                <div><span>Temperature:</span> 60°C (Heating temperature)</div>
+                <div><span>Gas Safety:</span> Safe</div>
+            </div>
+        </div>
+    </div>
+    </div>
+<div class="chatbot-icon" id="chatbot-icon">
+    <img src="Chatbot_icon.png" alt="Chatbot">
+</div>
+
+<div class="chatbot-popup" id="chatbot-popup">
+    <div class="chatbot-header">
+        <h3>Catalyzt-ChatBot</h3>
+        <button id="close-chatbot">×</button>
+    </div>
+    <div class="chatbot-body" id="chatbot-body">
+        <div id="chatbot-messages"></div>
+    </div>
+    <div class="chatbot-input">
+        <input type="text" id="chatbot-input" placeholder="Ask me anything...">
+        <button id="send-message">Send</button>
+    </div>
+</div>
+
+    <script>
+        function showExperiments() {
+            const selectedClass = document.getElementById('class-select').value;
+            const experimentLists = document.querySelectorAll('.experiment-list');
+            experimentLists.forEach(list => {
+                list.classList.remove('active');
+                if (list.id === `experiment-${selectedClass}`) {
+                    list.classList.add('active');
+                }
+            });
+        }
+
+        function showExperimentDetails(experimentId) {
+            const experimentDetails = document.querySelectorAll('.experiment-details');
+            experimentDetails.forEach(detail => {
+                detail.classList.remove('active');
+                if (detail.id === experimentId) {
+                    detail.classList.add('active');
+                }
+            });
+        }
+const chatbotIcon = document.getElementById("chatbot-icon");
+const chatbotPopup = document.getElementById("chatbot-popup");
+const closeChatbot = document.getElementById("close-chatbot");
+
+chatbotIcon.addEventListener("click", () => {
+    chatbotPopup.style.display = "block";
+});
+
+closeChatbot.addEventListener("click", () => {
+    chatbotPopup.style.display = "none";
+});
+
+const chatbotInput = document.getElementById("chatbot-input");
+const sendMessageButton = document.getElementById("send-message");
+const chatbotMessages = document.getElementById("chatbot-messages");
+
+sendMessageButton.addEventListener("click", () => {
+    const message = chatbotInput.value.trim();
+    if (message) {
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        chatbotMessages.appendChild(messageElement);
+        chatbotInput.value = ""; 
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; 
+    }
+});
+
+chatbotInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        sendMessageButton.click();
+    }
+});
+    let currentSpeech = null; 
+
+    function readInstructions(experimentId) {
+        const experimentDetails = document.getElementById(experimentId);
+        const instructions = experimentDetails.querySelector('ol').innerText; 
+
+        if ('speechSynthesis' in window) {
+            if (currentSpeech) {
+                window.speechSynthesis.cancel();
+            }
+
+            const speech = new SpeechSynthesisUtterance();
+            speech.text = instructions; 
+            speech.volume = 1; 
+            speech.rate = 1; 
+            speech.pitch = 1; 
+            speech.lang = 'en-US'; 
+
+            window.speechSynthesis.speak(speech);
+            currentSpeech = speech; 
+        } else {
+            alert("Your browser does not support text-to-speech. Please use a modern browser like Chrome or Edge.");
+        }
+    }
+
+    function stopSpeech() {
+        if ('speechSynthesis' in window && currentSpeech) {
+            window.speechSynthesis.cancel(); 
+            currentSpeech = null;
+        }
+    }
+    </script>
+</body>
+</html>

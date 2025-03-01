@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes - IntelliChem Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .quiz-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left; 
+        }
+
+        .quiz-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            display: none; 
+        }
+
+        .quiz-section.active {
+            display: block;
+        }
+
+        .quiz-section h2 {
+            color: #00eaff;
+            margin-bottom: 15px;
+        }
+
+        .quiz-question {
+            margin-bottom: 15px;
+        }
+
+        .quiz-question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .quiz-options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .quiz-options li {
+            margin-bottom: 10px;
+        }
+
+        .quiz-options label {
+            cursor: pointer;
+        }
+
+        .quiz-submit {
+            background: #00eaff;
+            color: #0a192f;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .quiz-submit:hover {
+            background: #00b8d4;
+        }
+
+        .quiz-result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #00eaff;
+        }
+
+        .class-selector {
+            margin-bottom: 20px;
+        }
+
+        .class-selector label {
+            font-size: 1.2em;
+            color: #00eaff;
+            margin-right: 10px;
+        }
+
+        .class-selector select {
+            padding: 10px;
+            border-radius: 5px;
+            background: rgba(229, 226, 226, 0.896);
+            color: 0 0 10px rgba(0, 255, 255, 0.3);;
+            border: 1px solid #00eaff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🔬 IntelliChem Lab</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="periodic_table.html">Periodic Table</a></li>
+            <li><a href="experiments.html">Experiments</a></li>
+            <li><a href="quizzes.html">Quizzes</a></li>
+        </ul>
+    </nav>
+
+    <div class="quiz-container">
+        <h1>🧪 Quizzes</h1>
+        <div class="class-selector">
+            <label for="class-select">Select Class:</label>
+            <select id="class-select" onchange="showQuiz()">
+                <option value="">-- Select a Class --</option>
+                <option value="6th">6th Grade</option>
+                <option value="7th">7th Grade</option>
+                <option value="8th">8th Grade</option>
+                <option value="9th">9th Grade</option>
+                <option value="10th">10th Grade</option>
+                <option value="11th">11th Grade</option>
+                <option value="12th">12th Grade</option>
+            </select>
+        </div>
+
+        <div class="quiz-section" id="quiz-6th">
+            <h2>6th Grade Chemistry Quiz</h2>
+            <form>
+                <div class="quiz-question">
+                    <p>1. What is the chemical symbol for water?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q1" value="A"> A. H2O</label></li>
+                        <li><label><input type="radio" name="q1" value="B"> B. CO2</label></li>
+                        <li><label><input type="radio" name="q1" value="C"> C. O2</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>2. Which gas do plants absorb during photosynthesis?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q2" value="A"> A. Oxygen</label></li>
+                        <li><label><input type="radio" name="q2" value="B"> B. Carbon Dioxide</label></li>
+                        <li><label><input type="radio" name="q2" value="C"> C. Nitrogen</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>3. What is the smallest unit of matter?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q3" value="A"> A. Molecule</label></li>
+                        <li><label><input type="radio" name="q3" value="B"> B. Atom</label></li>
+                        <li><label><input type="radio" name="q3" value="C"> C. Cell</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>4. Which of the following is a metal?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q4" value="A"> A. Oxygen</label></li>
+                        <li><label><input type="radio" name="q4" value="B"> B. Iron</label></li>
+                        <li><label><input type="radio" name="q4" value="C"> C. Carbon</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>5. What is the chemical formula for table salt?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q5" value="A"> A. NaCl</label></li>
+                        <li><label><input type="radio" name="q5" value="B"> B. H2O</label></li>
+                        <li><label><input type="radio" name="q5" value="C"> C. CO2</label></li>
+                    </ul>
+                </div>
+                <button type="button" class="quiz-submit" onclick="checkQuiz('quiz-6th')">Submit</button>
+                <div class="quiz-result" id="result-6th"></div>
+            </form>
+        </div>
+
+        <div class="quiz-section" id="quiz-7th">
+            <h2>7th Grade Chemistry Quiz</h2>
+            <form>
+                <div class="quiz-question">
+                    <p>1. What is the atomic number of Hydrogen?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q1" value="A"> A. 1</label></li>
+                        <li><label><input type="radio" name="q1" value="B"> B. 2</label></li>
+                        <li><label><input type="radio" name="q1" value="C"> C. 3</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>2. Which element is represented by the symbol 'O'?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q2" value="A"> A. Oxygen</label></li>
+                        <li><label><input type="radio" name="q2" value="B"> B. Gold</label></li>
+                        <li><label><input type="radio" name="q2" value="C"> C. Carbon</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>3. What is the chemical formula for sulfuric acid?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q3" value="A"> A. H2SO4</label></li>
+                        <li><label><input type="radio" name="q3" value="B"> B. HCl</label></li>
+                        <li><label><input type="radio" name="q3" value="C"> C. NaOH</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>4. Which gas is known as laughing gas?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q4" value="A"> A. Oxygen</label></li>
+                        <li><label><input type="radio" name="q4" value="B"> B. Nitrous Oxide</label></li>
+                        <li><label><input type="radio" name="q4" value="C"> C. Carbon Dioxide</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>5. What is the pH of pure water?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q5" value="A"> A. 7</label></li>
+                        <li><label><input type="radio" name="q5" value="B"> B. 5</label></li>
+                        <li><label><input type="radio" name="q5" value="C"> C. 10</label></li>
+                    </ul>
+                </div>
+                <button type="button" class="quiz-submit" onclick="checkQuiz('quiz-7th')">Submit</button>
+                <div class="quiz-result" id="result-7th"></div>
+            </form>
+        </div>
+
+        <div class="quiz-section" id="quiz-8th">
+            <h2>8th Grade Chemistry Quiz</h2>
+            <form>
+                <div class="quiz-question">
+                    <p>1. What is the chemical formula for methane?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q1" value="A"> A. CH4</label></li>
+                        <li><label><input type="radio" name="q1" value="B"> B. CO2</label></li>
+                        <li><label><input type="radio" name="q1" value="C"> C. H2O</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>2. Which of the following is a noble gas?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q2" value="A"> A. Helium</label></li>
+                        <li><label><input type="radio" name="q2" value="B"> B. Oxygen</label></li>
+                        <li><label><input type="radio" name="q2" value="C"> C. Nitrogen</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>3. What is the atomic mass of Carbon?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q3" value="A"> A. 12</label></li>
+                        <li><label><input type="radio" name="q3" value="B"> B. 14</label></li>
+                        <li><label><input type="radio" name="q3" value="C"> C. 16</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>4. Which element is used in fluorescent lights?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q4" value="A"> A. Mercury</label></li>
+                        <li><label><input type="radio" name="q4" value="B"> B. Sodium</label></li>
+                        <li><label><input type="radio" name="q4" value="C"> C. Iron</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>5. What is the chemical symbol for Gold?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q5" value="A"> A. Au</label></li>
+                        <li><label><input type="radio" name="q5" value="B"> B. Ag</label></li>
+                        <li><label><input type="radio" name="q5" value="C"> C. Fe</label></li>
+                    </ul>
+                </div>
+                <button type="button" class="quiz-submit" onclick="checkQuiz('quiz-8th')">Submit</button>
+                <div class="quiz-result" id="result-8th"></div>
+            </form>
+        </div>
+
+        <div class="quiz-section" id="quiz-9th">
+            <h2>9th Grade Chemistry Quiz</h2>
+            <form>
+                <div class="quiz-question">
+                    <p>1. What is the chemical formula for ammonia?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q1" value="A"> A. NH3</label></li>
+                        <li><label><input type="radio" name="q1" value="B"> B. NO2</label></li>
+                        <li><label><input type="radio" name="q1" value="C"> C. N2O</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>2. Which of the following is a halogen?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q2" value="A"> A. Fluorine</label></li>
+                        <li><label><input type="radio" name="q2" value="B"> B. Sodium</label></li>
+                        <li><label><input type="radio" name="q2" value="C"> C. Potassium</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>3. What is the pH of a neutral solution?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q3" value="A"> A. 7</label></li>
+                        <li><label><input type="radio" name="q3" value="B"> B. 5</label></li>
+                        <li><label><input type="radio" name="q3" value="C"> C. 10</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>4. Which gas is responsible for the greenhouse effect?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q4" value="A"> A. Carbon Dioxide</label></li>
+                        <li><label><input type="radio" name="q4" value="B"> B. Oxygen</label></li>
+                        <li><label><input type="radio" name="q4" value="C"> C. Nitrogen</label></li>
+                    </ul>
+                </div>
+                <div class="quiz-question">
+                    <p>5. What is the chemical symbol for Silver?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q5" value="A"> A. Ag</label></li>
+                        <li><label><input type="radio" name="q5" value="B"> B. Au</label></li>
+                        <li><label><input type="radio" name="q5" value="C"> C. Fe</label></li>
+                    </ul>
+                </div>
+                <button type="button" class="quiz-submit" onclick="checkQuiz('quiz-9th')">Submit</button>
+                <div class="quiz-result" id="result-9th"></div>
+            </form>
+        </div>
+
+        <div class="quiz-section" id="quiz-10th">
+            <h2>10th Grade Chemistry Quiz</h2>
+            <form>
+                <div class="quiz-question">
+                    <p>1. What is the chemical formula for sulfuric acid?</p>
+                    <ul class="quiz-options">
+                        <li><label><input type="radio" name="q1" value="A"> A. H2SO4</label></li>
+                        <li><label><input type="radio" name="q1" value="B"> B. HCl</label></li>
+                        <li><label><input type="radio" name="q1" value="C"> C. HNO3</label></li>
+                    </ul>
+    </div>
+    <div class="quiz-question">
+        <p>2. Which of the following is an alkali metal?</p>
+        <ul class="quiz-options">
+            <li><label><input type="radio" name="q2" value="A"> A. Sodium</label></li>
+            <li><label><input type="radio" name="q2" value="B"> B. Calcium</label></li>
+            <li><label><input type="radio" name="q2" value="C"> C. Magnesium</label></li>
+        </ul>
+    </div>
+    <div class="quiz-question">
+        <p>3. What is the atomic number of Oxygen?</p>
+        <ul class="quiz-options">
+            <li><label><input type="radio" name="q3" value="A"> A. 8</label></li>
+            <li><label><input type="radio" name="q3" value="B"> B. 16</label></li>
+            <li><label><input type="radio" name="q3" value="C"> C. 6</label></li>
+        </ul>
+    </div>
+    <div class="quiz-question">
+        <p>4. Which element is used in batteries?</p>
+        <ul class="quiz-options">
+            <li><label><input type="radio" name="q4" value="A"> A. Lithium</label></li>
+            <li><label><input type="radio" name="q4" value="B"> B. Copper</label></li>
+            <li><label><input type="radio" name="q4" value="C"> C. Aluminum</label></li>
+        </ul>
+    </div>
+    <div class="quiz-question">
+        <p>5. What is the chemical symbol for Potassium?</p>
+        <ul class="quiz-options">
+            <li><label><input type="radio" name="q5" value="A"> A. K</label></li>
+            <li><label><input type="radio" name="q5" value="B"> B. P</label></li>
+            <li><label><input type="radio" name="q5" value="C"> C. Pt</label></li>
+        </ul>
+    </div>
+    <button type="button" class="quiz-submit" onclick="checkQuiz('quiz-10th')">Submit</button>
+    <div class="quiz-result" id="result-10th"></div>
+</form>
+        </div>
+
+        <div class="quiz-section" id="quiz-11th">
+        <h2>11th Grade Chemistry Quiz</h2>
+        <form>
+            <div class="quiz-question">
+                <p>1. What is the chemical formula for benzene?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q1" value="A"> A. C6H6</label></li>
+                    <li><label><input type="radio" name="q1" value="B"> B. C6H12</label></li>
+                    <li><label><input type="radio" name="q1" value="C"> C. C6H10</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>2. Which of the following is a transition metal?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q2" value="A"> A. Iron</label></li>
+                    <li><label><input type="radio" name="q2" value="B"> B. Sodium</label></li>
+                    <li><label><input type="radio" name="q2" value="C"> C. Calcium</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>3. What is the molecular formula for glucose?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q3" value="A"> A. C6H12O6</label></li>
+                    <li><label><input type="radio" name="q3" value="B"> B. C6H10O5</label></li>
+                    <li><label><input type="radio" name="q3" value="C"> C. C6H6O6</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>4. Which gas is used in the Haber process?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q4" value="A"> A. Nitrogen</label></li>
+                    <li><label><input type="radio" name="q4" value="B"> B. Oxygen</label></li>
+                    <li><label><input type="radio" name="q4" value="C"> C. Hydrogen</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>5. What is the chemical symbol for Mercury?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q5" value="A"> A. Hg</label></li>
+                    <li><label><input type="radio" name="q5" value="B"> B. Mg</label></li>
+                    <li><label><input type="radio" name="q5" value="C"> C. Me</label></li>
+                </ul>
+            </div>
+            <button type="button" class="quiz-submit" onclick="checkQuiz('quiz-11th')">Submit</button>
+            <div class="quiz-result" id="result-11th"></div>
+        </form>
+        </div>
+
+        <div class="quiz-section" id="quiz-12th">
+        <h2>12th Grade Chemistry Quiz</h2>
+        <form>
+            <div class="quiz-question">
+                <p>1. What is the chemical formula for ethanol?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q1" value="A"> A. C2H5OH</label></li>
+                    <li><label><input type="radio" name="q1" value="B"> B. CH3OH</label></li>
+                    <li><label><input type="radio" name="q1" value="C"> C. C3H7OH</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>2. Which of the following is a lanthanide?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q2" value="A"> A. Cerium</label></li>
+                    <li><label><input type="radio" name="q2" value="B"> B. Uranium</label></li>
+                    <li><label><input type="radio" name="q2" value="C"> C. Thorium</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>3. What is the molecular formula for methane?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q3" value="A"> A. CH4</label></li>
+                    <li><label><input type="radio" name="q3" value="B"> B. C2H6</label></li>
+                    <li><label><input type="radio" name="q3" value="C"> C. C3H8</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>4. Which gas is used in the Ostwald process?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q4" value="A"> A. Ammonia</label></li>
+                    <li><label><input type="radio" name="q4" value="B"> B. Oxygen</label></li>
+                    <li><label><input type="radio" name="q4" value="C"> C. Nitrogen</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>5. What is the chemical symbol for Tungsten?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q5" value="A"> A. W</label></li>
+                    <li><label><input type="radio" name="q5" value="B"> B. Tn</label></li>
+                    <li><label><input type="radio" name="q5" value="C"> C. Tu</label></li>
+                </ul>
+            </div>
+            <button type="button" class="quiz-submit" onclick="checkQuiz('quiz-12th')">Submit</button>
+            <div class="quiz-result" id="result-12th"></div>
+        </form>
+        </div>
+    </div>
+
+<script>
+function showQuiz() {
+const selectedClass = document.getElementById('class-select').value;
+const quizzes = document.querySelectorAll('.quiz-section');
+quizzes.forEach(quiz => {
+    quiz.classList.remove('active');
+    if (quiz.id === `quiz-${selectedClass}`) {
+        quiz.classList.add('active');
+    }
+});
+}
+
+function checkQuiz(quizId) {
+    const form = document.getElementById(quizId);
+    const resultDiv = document.getElementById(`result-${quizId.split('-')[1]}`);
+    const answers = {
+        'quiz-6th': ['A', 'B', 'B', 'B', 'A'],
+        'quiz-7th': ['A', 'A', 'A', 'B', 'A'],
+        'quiz-8th': ['A', 'A', 'A', 'A', 'A'],
+        'quiz-9th': ['A', 'A', 'A', 'A', 'A'],
+        'quiz-10th': ['A', 'A', 'A', 'A', 'A'],
+        'quiz-11th': ['A', 'A', 'A', 'A', 'A'],
+        'quiz-12th': ['A', 'A', 'A', 'A', 'A'],
+    };
+
+    let score = 0;
+    const questions = form.querySelectorAll('.quiz-question');
+    questions.forEach((question, index) => {
+        const selected = question.querySelector('input:checked');
+        if (selected && selected.value === answers[quizId][index]) {
+            score++;
+        }
+    });
+
+    const totalQuestions = questions.length;
+    const percentage = (score / totalQuestions) * 100;
+
+    let message = "";
+    if (percentage >= 80) {
+        message = "Very well done! 🎉";
+    } else if (percentage >= 50) {
+        message = "Good effort! Keep practicing! 💪";
+    } else {
+        message = "Don't worry! Keep learning and try again! 🌟";
+    }
+
+    resultDiv.textContent = `You scored ${score} out of ${totalQuestions}! ${message}`;
+}
+</script>
+<div class="chatbot-icon" id="chatbot-icon">
+    <img src="Chatbot_icon.png" alt="Chatbot">
+</div>
+
+<div class="chatbot-popup" id="chatbot-popup">
+    <div class="chatbot-header">
+        <h3>Catalyzt-ChatBot</h3>
+        <button id="close-chatbot">×</button>
+    </div>
+    <div class="chatbot-body" id="chatbot-body">
+        <div id="chatbot-messages"></div>
+    </div>
+    <div class="chatbot-input">
+        <input type="text" id="chatbot-input" placeholder="Ask me anything...">
+        <button id="send-message">Send</button>
+    </div>
+</div>
+
+    <script>
+        function showExperiments() {
+            const selectedClass = document.getElementById('class-select').value;
+            const experimentLists = document.querySelectorAll('.experiment-list');
+            experimentLists.forEach(list => {
+                list.classList.remove('active');
+                if (list.id === `experiment-${selectedClass}`) {
+                    list.classList.add('active');
+                }
+            });
+        }
+
+        function showExperimentDetails(experimentId) {
+            const experimentDetails = document.querySelectorAll('.experiment-details');
+            experimentDetails.forEach(detail => {
+                detail.classList.remove('active');
+                if (detail.id === experimentId) {
+                    detail.classList.add('active');
+                }
+            });
+        }
+const chatbotIcon = document.getElementById("chatbot-icon");
+const chatbotPopup = document.getElementById("chatbot-popup");
+const closeChatbot = document.getElementById("close-chatbot");
+
+chatbotIcon.addEventListener("click", () => {
+    chatbotPopup.style.display = "block";
+});
+
+closeChatbot.addEventListener("click", () => {
+    chatbotPopup.style.display = "none";
+});
+
+const chatbotInput = document.getElementById("chatbot-input");
+const sendMessageButton = document.getElementById("send-message");
+const chatbotMessages = document.getElementById("chatbot-messages");
+
+sendMessageButton.addEventListener("click", () => {
+    const message = chatbotInput.value.trim();
+    if (message) {
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        chatbotMessages.appendChild(messageElement);
+        chatbotInput.value = ""; 
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; 
+    }
+});
+
+chatbotInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        sendMessageButton.click();
+    }
+});
+    let currentSpeech = null; 
+
+    function readInstructions(experimentId) {
+        const experimentDetails = document.getElementById(experimentId);
+        const instructions = experimentDetails.querySelector('ol').innerText; 
+
+        if ('speechSynthesis' in window) {
+            if (currentSpeech) {
+                window.speechSynthesis.cancel();
+            }
+
+            const speech = new SpeechSynthesisUtterance();
+            speech.text = instructions; 
+            speech.volume = 1; 
+            speech.rate = 1; 
+            speech.pitch = 1; 
+            speech.lang = 'en-US'; 
+
+            window.speechSynthesis.speak(speech);
+            currentSpeech = speech; 
+        } else {
+            alert("Your browser does not support text-to-speech. Please use a modern browser like Chrome or Edge.");
+        }
+    }
+
+    function stopSpeech() {
+        if ('speechSynthesis' in window && currentSpeech) {
+            window.speechSynthesis.cancel(); 
+            currentSpeech = null;
+        }
+    }
+    </script>
+
+</body>
+</html>
